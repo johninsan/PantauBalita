@@ -49,6 +49,15 @@
                             <input class="with-gap" name="group1" type="radio"  />
                             <span>Perempuan</span>
                         </label>
+                    <div class="file-field input-field col m6 s12">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" placeholder="Unggah foto balita" type="text">
+                        </div>
+                    </div>
                 </div>
                 <div class="container">
                     <div class="row">

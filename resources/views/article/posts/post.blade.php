@@ -1,0 +1,95 @@
+@extends('layouts.app') 
+@section('headSection')
+@endsection
+ 
+@section('main-content')
+<section class="blue lighten-4">
+    <h3 class="light grey-text text-darken-3 center">Buat Article</h3>
+</section>
+<form action="">
+    <div class="container">
+        <div class="row">
+            <div class="input-field col m6 s12">
+                <i class="material-icons prefix">colorize</i>
+                <input id="title" type="text" name="title" class="validate">
+                <label for="title">Judul Article :</label>
+                <span class="helper-text" data-error="wrong" data-success="right"></span>
+            </div>
+            <div class="input-field col m6 s12">
+                <i class="material-icons prefix">colorize</i>
+                <input id="sub" name="sub" type="text" class="validate">
+                <label for="sub">Sub Judul:</label>
+                <span class="helper-text" data-error="wrong" data-success="right"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m5 s12">
+                <i class="material-icons prefix">colorize</i>
+                <input id="slug" name="slug" type="text" class="validate">
+                <label for="slug">Article Slug:</label>
+                <span class="helper-text" data-error="wrong" data-success="right"></span>
+            </div>
+            <div class="file-field input-field col m4 s12">
+                <div class="btn">
+                    <span>File</span>
+                    <input type="file">
+                </div>
+                <div class="file-path-wrapper">
+                    <input class="file-path validate" placeholder="Unggah foto Article" type="text">
+                </div>
+            </div>
+            <label class="col m3 s12">
+                        <input type="checkbox" />
+                        <span>Publish</span>
+                    </label>
+        </div>
+        <div class="row">
+            <div class="input-field col m6 s12">
+                <select multiple>
+                          <option value="" disabled>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                <label>Pilih Category:</label>
+            </div>
+            <div class="input-field col m6 s12">
+                <select multiple>
+                          <option value="" disabled>Choose your option</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                <label>Pilih Tag:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m12 s12">
+                <textarea class="editor materialize-textarea" name="body" id="editor1"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col m6 s12">
+                <a class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
+                <button class="btn waves-effect waves-light col m6 s6 push-s1 push-m2 z-depth-3" type="submit" name="action">Submit
+                <i class="material-icons right">done</i>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+@endsection
+ 
+@section('footerSection')
+<script src="{{asset('materialize/ckeditor/ckeditor.js')}}"></script>
+<script type="text/javascript">
+    $(function () {
+            // Replace the <textarea id="editor1"> with a CKEditor
+            // instance, using default configuration.
+            CKEDITOR.replace('editor1')
+        })
+
+</script>
+@endsection

@@ -13,9 +13,11 @@
   <!-- Dropdown Structure -->
   <ul id="dropdown1" class="dropdown-content">
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
-    <li><a href="#!">two</a></li>
-    <li class="divider"></li>
-    <li><a href="#!">three</a></li>
+    <li><a href="{{route('Posyandu.index')}}">Posyandu</a></li>
+    <li><a href="{{route('post.index')}}">Articlepost</a></li>
+    <li><a href="{{route('tag.index')}}">tag</a></li>
+    <li><a href="{{route('category.index')}}">category</a></li>
+    <li><a href="{{route('monitor')}}">Monitor</a></li>
   </ul>
   <ul id="dropdownmobile" class="dropdown-content">
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>

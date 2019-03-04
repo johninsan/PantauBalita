@@ -16,6 +16,15 @@ Route::group(['namespace' => 'OrangTua'], function () {
 });
 Route::group(['namespace' => 'Balita'], function () {
 	Route::resource('PantauBalita/DaftarBalita', 'BalitaController');
+	Route::get('monitorBalita', 'MonitorController@index')->name('monitor');
+});
+Route::group(['namespace' => 'Posyandu'], function () {
+	Route::resource('PantauBalita/Posyandu', 'PosyanduController');
+});
+Route::group(['namespace' => 'post'], function () {
+	Route::resource('PantauBalita/post', 'PostController');
+	Route::resource('PantauBalita/tag', 'TagController');
+	Route::resource('PantauBalita/category', 'CategoryController');
 });
 // Route::get('/', function () {
 //     return view('homepage.home');

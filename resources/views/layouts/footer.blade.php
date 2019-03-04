@@ -35,6 +35,7 @@
 	$('.materialboxed').materialbox();
 	$('.sidenav').sidenav();
 	$(".dropdown-trigger").dropdown();
+	$('select').formSelect();
 	$('.modal').modal();
 	$("#showPass").click(function() {
 		if ($("#myPass").attr("type") == "password") {

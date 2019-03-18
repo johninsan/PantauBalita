@@ -14,7 +14,7 @@ class PosyanduController extends Controller
      */
     public function index()
     {
-        return view('posyandus.addposyandu');
+        return view('posyandus.show');
     }
 
     /**
@@ -24,7 +24,7 @@ class PosyanduController extends Controller
      */
     public function create()
     {
-        //
+        return view('posyandus.addposyandu');
     }
 
     /**

@@ -27,3 +27,11 @@ section{
 	border: 1px solid #dddddd;
 	padding: 10px;
 }
+.isi-img img{
+	height: 400px;
+	filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.8));
+}
+.bayiimg img{
+	/* max-width:250px; */
+	filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.8)); 
+}

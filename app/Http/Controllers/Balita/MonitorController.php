@@ -11,4 +11,9 @@ class MonitorController extends Controller
     {
         return view('balitas.monitor');
     }
+
+    public function hasilmonitor()
+    {
+        return view('balitas.hasilmonitor');
+    }
 }

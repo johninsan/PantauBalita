@@ -51,7 +51,7 @@
 				</div>
 			</div>
 			<div class="container">
-				<div class="input-field col m6 s12">
+				<div class="col m6 s12">
 					<span>sudah punya akun? <a href="#modal1" class="modal-trigger">login disini</a></span>
 				</div>
 				<div class="row">

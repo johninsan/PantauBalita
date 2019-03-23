@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->text('alamat');
             $table->string('kodepos');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('tipe')->comment('1 OrangTua 2 Petugas');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

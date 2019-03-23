@@ -1,18 +1,14 @@
 <?php
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
-Route::get('/', 'HomeController@halamanawal')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+//auth routes
+Route::post('/loginpost', 'HomeController@loginpost');
+Route::post('/registerpost', 'HomeController@registerPost')->name('registerpost');
+//article
 Route::get('/isiarticle', 'FrontController@isipost')->name('isi');
 Route::get('/show', 'FrontController@showpost')->name('showpost');
+//pesan routes
+Route::get('/pesandetailortu', 'PesanController@pesandetailortu')->name('pesandetailortu');
+Route::get('/pesanortu', 'PesanController@pesanortu')->name('pesanortu');
 Route::group(['namespace' => 'OrangTua'], function () {
 	Route::get('testyajra', 'OrangTuaController@testyajra')->name('testyajra');
 });

@@ -6,7 +6,8 @@
 <section class="blue lighten-4">
     <h3 class="light grey-text text-darken-3 center">Judul Category</h3>
 </section>
-<form action="">
+<form action="{{route('category.store')}}" method="POST">
+    {{csrf_field()}}
     <div class="container">
         <div class="row">
             <div class="input-field col m6 s12 push-m2">

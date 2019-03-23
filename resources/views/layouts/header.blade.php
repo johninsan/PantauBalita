@@ -22,6 +22,8 @@
     <li><a href="{{route('hasilmonitor')}}">Hasil</a></li>
     <li><a href="{{route('isi')}}">isipost</a></li>
     <li><a href="{{route('showpost')}}">showpost</a></li>
+    <li><a href="{{route('pesandetailortu')}}">pesandetailortu</a></li>
+    <li><a href="{{route('pesanortu')}}">pesanortu</a></li>
   </ul>
   <ul id="dropdownmobile" class="dropdown-content">
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
@@ -38,8 +40,20 @@
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="{{ route('testyajra') }}">Test Yajra</a></li>
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+          @if(!\Illuminate\Support\Facades\Session::get('login'))
           <li><a href="#modal1" class="modal-trigger">Login</a></li>
           <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
+          @else
+          <li>
+            <a href="{{ route('logout') }}" onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();">
+               Logout
+           </a>
+            <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+              {{ csrf_field() }}
+            </form>
+          </li>
+          @endif
         </ul>
       </div>
     </div>
@@ -52,34 +66,37 @@
   <li><a href="#modal1" class="modal-trigger">Login</a></li>
   <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
 </ul>
-<div id="modal1" class="modal modal-fixed-footer">
-  <div class="modal-content">
-    <h4>Login</h4>
-    <p>Masukkan Email dan Password</p>
-    <div class="row">
-      <div class="input-field col s6">
-        <i class="material-icons prefix">email</i>
-        <input id="email" type="email" class="validate">
-        <label for="email">Email</label>
-        <span class="helper-text" data-error="wrong" data-success="right"></span>
+<form action="/loginpost" method="post">
+  {{csrf_field()}}
+  <div id="modal1" class="modal modal-fixed-footer">
+    <div class="modal-content">
+      <h4>Login</h4>
+      <p>Masukkan Username dan Password</p>
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">account_circle</i>
+          <input id="uname" name="username" type="text" class="validate">
+          <label for="uname">Username</label>
+          <span class="helper-text" data-error="wrong" data-success="right"></span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">lock</i>
+          <input placeholder="Minimal 6 digit" name="password" id="myPass" type="password" class="validate">
+          <label for="first_name">Password</label>
+        </div>
+        <span id="showPass" class="push-s1">
+              <i class="material-icons prefix" style="display: none;">visibility</i>
+              <i class="material-icons prefix">visibility_off</i>
+            </span>
       </div>
     </div>
-    <div class="row">
-      <div class="input-field col s6">
-        <i class="material-icons prefix">lock</i>
-        <input placeholder="Minimal 6 digit" id="myPass" type="password" class="validate">
-        <label for="first_name">Password</label>
-      </div>
-      <span id="showPass" class="push-s1">
-        <i class="material-icons prefix" style="display: none;">visibility</i>
-        <i class="material-icons prefix">visibility_off</i>
-      </span>
+    <div class="modal-footer">
+      <a class="modal-close pink lighten-effect pink lighten-2 btn col s2 z-depth-3"><i class="material-icons left">close</i>Tutup</a>
+      <button class="btn waves-effect waves-light col s2 push-s1 z-depth-3" type="submit">Login
+            <i class="material-icons right">done</i>
+          </button>
     </div>
   </div>
-  <div class="modal-footer">
-    <a class="modal-close pink lighten-effect pink lighten-2 btn col s2 z-depth-3"><i class="material-icons left">close</i>Tutup</a>
-    <button class="btn waves-effect waves-light col s2 push-s1 z-depth-3" type="submit" name="action">Login
-      <i class="material-icons right">done</i>
-    </button>
-  </div>
-</div>
+</form>

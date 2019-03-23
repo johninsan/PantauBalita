@@ -1,5 +1,11 @@
 @extends('layouts/app') 
-@section('main-content')
+@section('headSection')
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+@endsection
+ 
+@section('main-content') @if(\Illuminate\Support\Facades\Session::has('alert-success')) {!! \Illuminate\Support\Facades\Session::get('alert-success')
+!!} @endif
 <div class="slider">
 	<ul class="slides">
 		<li>

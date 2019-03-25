@@ -4,6 +4,9 @@ namespace App\Http\Controllers\post;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Article\post;
+use App\Model\Article\tag;
+use App\Model\Article\category;
 
 class PostController extends Controller
 {
@@ -14,7 +17,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('article.posts.post');
+        $posts = post::all();
+        return view('article.posts.show', compact('posts'));
     }
 
     /**
@@ -24,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $tags = tag::all();
+        $categories = category::all();
+        return view('article.posts.post', compact('categories', 'tags'));
     }
 
     /**
@@ -35,7 +41,28 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'subtitle' => 'required',
+            'slug' => 'required',
+            'body' => 'required',
+            'image' => 'required',
+        ]);
+        if ($request->hasFile('image')) {
+            $imageName = $request->image->store('public');
+        }
+        $post = new post;
+        $post->image = $imageName;
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->slug = $request->slug;
+        $post->body = $request->body;
+        $post->status = $request->status;
+        $post->save();
+        $post->tags()->sync($request->tags);
+        $post->categories()->sync($request->categories);
+
+        return redirect(route('post.index'));
     }
 
     /**
@@ -57,7 +84,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = post::with('tags', 'categories')->where('id', $id)->first();
+        $tags = tag::all();
+        $categories = category::all();
+        return view('article.posts.edit', compact('post', 'tags', 'categories'));
     }
 
     /**
@@ -69,7 +99,28 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'subtitle' => 'required',
+            'slug' => 'required',
+            'body' => 'required',
+            'image' => 'required',
+        ]);
+        if ($request->hasFile('image')) {
+            $imageName = $request->image->store('public');
+        }
+        $post = post::find($id);
+        $post->image = $imageName;
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->slug = $request->slug;
+        $post->body = $request->body;
+        $post->status = $request->status;
+        $post->tags()->sync($request->tags);
+        $post->categories()->sync($request->categories);
+        $post->save();
+
+        return redirect(route('post.index'));
     }
 
     /**

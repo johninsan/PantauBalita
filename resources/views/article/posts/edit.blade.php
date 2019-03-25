@@ -6,19 +6,19 @@
 <section class="blue lighten-4">
     <h3 class="light grey-text text-darken-3 center">Buat Article</h3>
 </section>
-<form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data">
-    {{csrf_field()}}
+<form action="{{route('post.update',$post->id)}}" method="POST" enctype="multipart/form-data">
+    {{csrf_field()}} {{method_field('PUT')}}
     <div class="container">
         <div class="row">
             <div class="input-field col m6 s12">
                 <i class="material-icons prefix">colorize</i>
-                <input id="title" type="text" name="title" class="validate">
+                <input id="title" value="{{$post->title}}" type="text" name="title" class="validate">
                 <label for="title">Judul Article :</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
             <div class="input-field col m6 s12">
                 <i class="material-icons prefix">colorize</i>
-                <input id="sub" name="subtitle" type="text" class="validate">
+                <input id="sub" name="subtitle" value="{{$post->subtitle}}" type="text" class="validate">
                 <label for="sub">Sub Judul:</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
@@ -26,7 +26,7 @@
         <div class="row">
             <div class="input-field col m5 s12">
                 <i class="material-icons prefix">colorize</i>
-                <input id="slug" name="slug" type="text" class="validate">
+                <input id="slug" name="slug" type="text" value="{{$post->slug}}" class="validate">
                 <label for="slug">Article Slug:</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
@@ -40,7 +40,9 @@
                 </div>
             </div>
             <label class="col m3 s12">
-                        <input type="checkbox" value="1" name="status" />
+                        <input type="checkbox" value="1" name="status"
+                        @if($post ->status == 1) {{'checked'}}
+                        @endif/>
                         <span>Publish</span>
                     </label>
         </div>
@@ -49,7 +51,14 @@
                 <select name="categories[]" multiple>
                     <option value="" disabled>Choose your option</option>
                     @foreach($categories as $category)
-                        <option value="{{$category->id}}">{{$category->name}}</option>
+                        <option value="{{$category->id}}"
+                                @foreach($post->categories as $postCategory)
+                                @if($postCategory -> id == $category ->id)
+                                selected
+                                @endif
+                                @endforeach>
+                                {{$category->name}}
+                        </option>
                     @endforeach
                         </select>
                 <label>Pilih Category:</label>
@@ -58,7 +67,14 @@
                 <select name="tags[]" multiple>
                     <option value="" disabled>Choose your option</option>
                     @foreach($tags as $tag)
-                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        <option value="{{$tag->id}}"
+                                @foreach($post->tags as $postTag)
+                                @if($postTag -> id == $tag ->id)
+                                selected
+                                @endif
+                                @endforeach>
+                                {{$tag->name}}
+                        </option>
                     @endforeach
                 </select>
                 <label>Pilih Tag:</label>
@@ -66,7 +82,7 @@
         </div>
         <div class="row">
             <div class="input-field col m12 s12">
-                <textarea class="editor materialize-textarea" name="body" id="editor1"></textarea>
+                <textarea class="editor materialize-textarea" name="body" id="editor1">{{$post->body}}</textarea>
             </div>
         </div>
     </div>

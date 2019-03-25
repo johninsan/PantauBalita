@@ -15,15 +15,17 @@
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
     <li><a href="{{route('Posyandu.create')}}">Posyandu</a></li>
     <li><a href="{{route('Posyandu.index')}}">showPosyandu</a></li>
-    <li><a href="{{route('post.index')}}">Articlepost</a></li>
-    <li><a href="{{route('tag.index')}}">tag</a></li>
-    <li><a href="{{route('category.index')}}">category</a></li>
     <li><a href="{{route('monitor')}}">Monitor</a></li>
     <li><a href="{{route('hasilmonitor')}}">Hasil</a></li>
-    <li><a href="{{route('isi')}}">isipost</a></li>
+    <li><a href="{{route('isi',$post->slug)}}">isipost</a></li>
     <li><a href="{{route('showpost')}}">showpost</a></li>
     <li><a href="{{route('pesandetailortu')}}">pesandetailortu</a></li>
     <li><a href="{{route('pesanortu')}}">pesanortu</a></li>
+  </ul>
+  <ul class="dropdown-content" id="dropdownarticle">
+    <li><a href="{{route('post.index')}}">Articlepost</a></li>
+    <li><a href="{{route('tag.index')}}">tag</a></li>
+    <li><a href="{{route('category.index')}}">category</a></li>
   </ul>
   <ul id="dropdownmobile" class="dropdown-content">
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
@@ -31,6 +33,7 @@
     <li class="divider"></li>
     <li><a href="#!">three</a></li>
   </ul>
+
   <nav class="teal darken-1">
     <div class="container">
       <div class="nav-wrapper">
@@ -40,6 +43,7 @@
           <li><a href="{{ route('home') }}">Home</a></li>
           <li><a href="{{ route('testyajra') }}">Test Yajra</a></li>
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a></li>
           @if(!\Illuminate\Support\Facades\Session::get('login'))
           <li><a href="#modal1" class="modal-trigger">Login</a></li>
           <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
@@ -66,6 +70,7 @@
   <li><a href="#modal1" class="modal-trigger">Login</a></li>
   <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
 </ul>
+
 <form action="/loginpost" method="post">
   {{csrf_field()}}
   <div id="modal1" class="modal modal-fixed-footer">

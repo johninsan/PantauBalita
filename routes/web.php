@@ -4,7 +4,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::post('/loginpost', 'HomeController@loginpost');
 Route::post('/registerpost', 'HomeController@registerPost')->name('registerpost');
 //article
-Route::get('/isiarticle', 'FrontController@isipost')->name('isi');
+Route::get('isiarticle/{post}', 'FrontController@isipost')->name('isi');
 Route::get('/show', 'FrontController@showpost')->name('showpost');
 //pesan routes
 Route::get('/pesandetailortu', 'PesanController@pesandetailortu')->name('pesandetailortu');

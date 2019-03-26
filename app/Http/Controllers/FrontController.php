@@ -10,10 +10,11 @@ class FrontController extends Controller
 {
     public function isipost(post $post)
     {
-        return view('postfront.isipost', compact('post', 'contents'));
+        return view('postfront.isipost', compact('post'));
     }
     public function showpost()
     {
-        return view('postfront.show');
+        $posts = post::where('status', 1)->orderBy('created_at', 'DESC')->paginate(5);
+        return view('postfront.show', compact('posts'));
     }
 }

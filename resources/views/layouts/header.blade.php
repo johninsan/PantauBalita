@@ -17,7 +17,6 @@
     <li><a href="{{route('Posyandu.index')}}">showPosyandu</a></li>
     <li><a href="{{route('monitor')}}">Monitor</a></li>
     <li><a href="{{route('hasilmonitor')}}">Hasil</a></li>
-    <li><a href="{{route('isi',$post->slug)}}">isipost</a></li>
     <li><a href="{{route('showpost')}}">showpost</a></li>
     <li><a href="{{route('pesandetailortu')}}">pesandetailortu</a></li>
     <li><a href="{{route('pesanortu')}}">pesanortu</a></li>

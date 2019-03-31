@@ -13,8 +13,8 @@
   <!-- Dropdown Structure -->
   <ul id="dropdown1" class="dropdown-content">
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
-    <li><a href="{{route('Posyandu.create')}}">Posyandu</a></li>
     <li><a href="{{route('Posyandu.index')}}">showPosyandu</a></li>
+    <li><a href="{{route('showposyandu')}}">showjadwalPosyandu</a></li>
     <li><a href="{{route('monitor')}}">Monitor</a></li>
     <li><a href="{{route('hasilmonitor')}}">Hasil</a></li>
     <li><a href="{{route('showpost')}}">showpost</a></li>

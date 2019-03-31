@@ -7,32 +7,36 @@
     <h3 class="light grey-text text-darken-3 center">Tambah Jadwal Posyandu</h3>
 </section>
 <div class="container">
-    <form action="{{route('Posyandu.store')}}" method="post">
-        {{csrf_field()}}
+    <form action="{{route('Posyandu.update',$posyandu->id)}}" method="post">
+        {{csrf_field()}}{{method_field('PUT')}}
         <div class="row">
             <div class="input-field col m6 s12">
                 <select name="rw_id">
                         <option value="" disabled selected>Pilih RW:</option>
-                        @foreach($rws as $rw)
-                            <option value="{{$rw->id}}">{{$rw->rw}}</option>
-                        @endforeach
+                            @foreach(\App\Model\Posyandu\rw::all() as $cihuy)
+                                  <option value="{{ $cihuy->id }}"
+                                    @if($posyandu ->rw_id == $cihuy->id)
+                                    selected
+                                    @endif>{{ $cihuy->rw }}
+                                </option>
+                            @endforeach
                 </select>
             </div>
             <div class="input-field col m6 s12">
                 <i class="material-icons prefix">date_range</i>
-                <input type="text" name="tanggal" class="datepicker" data-date-format="yyyy-mm-dd H:i:s">
+                <input type="text" name="tanggal" class="datepicker" value="{{$posyandu->tanggal}}">
                 <label>Tanggal Dilaksanakan:</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col m6 s12">
                 <i class="material-icons prefix">mode_edit</i>
-                <textarea id="deskripsi" name="deskripsi" class="materialize-textarea" data-length="120"></textarea>
+                <textarea id="deskripsi" name="deskripsi" class="materialize-textarea" data-length="120">{{$posyandu->deskripsi}}</textarea>
                 <label for="deskripsi">Deskripsi Kegiatan:</label>
             </div>
             <div class="input-field col m6 s12">
                 <i class="material-icons prefix">phone</i>
-                <input id="notelp" type="tel" name="phone" class="validate" data-length="13">
+                <input id="notelp" value="{{$posyandu->phone}}" type="tel" name="phone" class="validate" data-length="13">
                 <label for="password">Nomor Telpon</label>
             </div>
         </div>
@@ -44,33 +48,47 @@
         <div class="container">
             <div class="row">
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="kesehatanibuanak"/>
+                    <input type="checkbox" value="1" name="kesehatanibuanak"@if($posyandu ->kesehatanibuanak == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Kesehatan ibu dan anak</span>
                 </label>
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="KB"/>
+                    <input type="checkbox" value="1" name="KB"@if($posyandu ->KB == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Keluarga berencana</span>
                 </label>
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="imun"/>
+                    <input type="checkbox" value="1" name="imun" @if($posyandu ->imun == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Imunisasi</span>
                 </label>
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="gizi"/>
+                    <input type="checkbox" value="1" name="gizi" @if($posyandu ->gizi == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Peningkatan gizi</span>
                 </label>
             </div>
             <div class="row">
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="diare"/>
+                    <input type="checkbox" value="1" name="diare" @if($posyandu ->diare == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Penanggulangan diare</span>
                 </label>
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="sanitasidasar"/>
+                    <input type="checkbox" value="1" name="sanitasidasar" @if($posyandu ->sanitasidasar == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Sanitasi dasar</span>
                 </label>
                 <label class="col m3 s12">
-                    <input type="checkbox" value="1" name="penyediaanobat"/>
+                    <input type="checkbox" value="1" name="penyediaanobat" @if($posyandu ->penyediaanobat == 1)
+                    {{'checked'}}
+                    @endif/>
                     <span>Penyediaan obat esensial</span>
                 </label>
             </div>

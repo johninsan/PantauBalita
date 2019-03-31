@@ -32,6 +32,9 @@
 		transition: 600,
 		interval: 3000
 	});
+	$('.datepicker').datepicker({
+		format: 'yyyy-mm-dd'
+	});
 	$('.materialboxed').materialbox();
 	$('.sidenav').sidenav();
 	$(".dropdown-trigger").dropdown();
@@ -51,5 +54,7 @@
 	// $('.slider').slider();
 
 </script>
+
+
 
 @section('footerSection') @show

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Posyandu;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Posyandu\posyandu;
+use App\Model\Posyandu\rw;
 
 class PosyanduController extends Controller
 {
@@ -14,7 +16,8 @@ class PosyanduController extends Controller
      */
     public function index()
     {
-        return view('posyandus.show');
+        $posyandus = posyandu::all();
+        return view('posyandus.show', compact('posyandus'));
     }
 
     /**
@@ -24,7 +27,8 @@ class PosyanduController extends Controller
      */
     public function create()
     {
-        return view('posyandus.addposyandu');
+        $rws = rw::all();
+        return view('posyandus.addposyandu', compact('rws'));
     }
 
     /**
@@ -35,7 +39,55 @@ class PosyanduController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'deskripsi' => 'required',
+            'phone' => 'required',
+            'rw_id' => 'required',
+        ]);
+        $tanggal = date("Y-m-d");
+        $posyandu = new posyandu;
+        $posyandu->rw_id = $request->rw_id;
+        $posyandu->tanggal = $request->tanggal;
+        $posyandu->deskripsi = $request->deskripsi;
+        $posyandu->phone = $request->phone;
+        if (empty($request->kesehatanibuanak)) {
+            $posyandu->kesehatanibuanak = 0;
+        } else {
+            $posyandu->kesehatanibuanak = $request->kesehatanibuanak;
+        }
+        if (empty($request->KB)) {
+            $posyandu->KB = 0;
+        } else {
+            $posyandu->KB = $request->KB;
+        }
+        if (empty($request->imun)) {
+            $posyandu->imun = 0;
+        } else {
+            $posyandu->imun = $request->imun;
+        }
+        if (empty($request->diare)) {
+            $posyandu->diare = 0;
+        } else {
+            $posyandu->diare = $request->diare;
+        }
+        if (empty($request->gizi)) {
+            $posyandu->gizi = 0;
+        } else {
+            $posyandu->gizi = $request->gizi;
+        }
+        if (empty($request->sanitasidasar)) {
+            $posyandu->sanitasidasar = 0;
+        } else {
+            $posyandu->sanitasidasar = $request->sanitasidasar;
+        }
+        if (empty($request->penyediaanobat)) {
+            $posyandu->penyediaanobat = 0;
+        } else {
+            $posyandu->penyediaanobat = $request->penyediaanobat;
+        }
+        $posyandu->save();
+
+        return redirect(route('Posyandu.index'));
     }
 
     /**
@@ -57,7 +109,8 @@ class PosyanduController extends Controller
      */
     public function edit($id)
     {
-        //
+        $posyandu = posyandu::where('id', $id)->first();
+        return view('posyandus.edit', compact('posyandu'));
     }
 
     /**
@@ -69,7 +122,55 @@ class PosyanduController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'deskripsi' => 'required',
+            'phone' => 'required',
+            'rw_id' => 'required',
+        ]);
+        $tanggal = date("Y-m-d");
+        $posyandu = posyandu::find($id);
+        $posyandu->rw_id = $request->rw_id;
+        $posyandu->tanggal = $request->tanggal;
+        $posyandu->deskripsi = $request->deskripsi;
+        $posyandu->phone = $request->phone;
+        if (empty($request->kesehatanibuanak)) {
+            $posyandu->kesehatanibuanak = 0;
+        } else {
+            $posyandu->kesehatanibuanak = $request->kesehatanibuanak;
+        }
+        if (empty($request->KB)) {
+            $posyandu->KB = 0;
+        } else {
+            $posyandu->KB = $request->KB;
+        }
+        if (empty($request->imun)) {
+            $posyandu->imun = 0;
+        } else {
+            $posyandu->imun = $request->imun;
+        }
+        if (empty($request->diare)) {
+            $posyandu->diare = 0;
+        } else {
+            $posyandu->diare = $request->diare;
+        }
+        if (empty($request->gizi)) {
+            $posyandu->gizi = 0;
+        } else {
+            $posyandu->gizi = $request->gizi;
+        }
+        if (empty($request->sanitasidasar)) {
+            $posyandu->sanitasidasar = 0;
+        } else {
+            $posyandu->sanitasidasar = $request->sanitasidasar;
+        }
+        if (empty($request->penyediaanobat)) {
+            $posyandu->penyediaanobat = 0;
+        } else {
+            $posyandu->penyediaanobat = $request->penyediaanobat;
+        }
+        $posyandu->save();
+
+        return redirect(route('Posyandu.index'));
     }
 
     /**
@@ -80,6 +181,7 @@ class PosyanduController extends Controller
      */
     public function destroy($id)
     {
-        //
+        posyandu::where('id', $id)->delete();
+        return redirect()->back();
     }
 }

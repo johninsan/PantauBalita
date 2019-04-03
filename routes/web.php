@@ -8,7 +8,7 @@ Route::get('isiarticle/{post}', 'FrontController@isipost')->name('isi');
 Route::get('/show', 'FrontController@showpost')->name('showpost');
 //posyandus
 Route::get('/showPosyandu', 'FrontController@showposyandu')->name('showposyandu');
-Route::get('/isiposyandu', 'FrontController@isiposyandu')->name('isiposyandu');
+Route::get('/isiposyandu/{id}', 'FrontController@isiposyandu')->name('isiposyandu');
 //pesan routes
 Route::get('/pesandetailortu', 'PesanController@pesandetailortu')->name('pesandetailortu');
 Route::get('/pesanortu', 'PesanController@pesanortu')->name('pesanortu');

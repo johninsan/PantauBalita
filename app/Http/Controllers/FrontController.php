@@ -24,8 +24,10 @@ class FrontController extends Controller
         $posyandus = posyandu::orderBy('created_at', 'DESC')->paginate(8);
         return view('posyandufront.show', compact('posyandus'));
     }
-    public function isiposyandu()
+    public function isiposyandu($id)
     {
-        return view('posyandufront.isiposyandu');
+        $idasli = base64_decode($id);
+        $posyandus = posyandu::where('id', $idasli)->get();
+        return view('posyandufront.isiposyandu', compact('posyandus'));
     }
 }

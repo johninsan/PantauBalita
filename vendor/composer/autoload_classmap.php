@@ -35,6 +35,8 @@ return array(
     'App\\Model\\Article\\category' => $baseDir . '/app/Model/Article/category.php',
     'App\\Model\\Article\\post' => $baseDir . '/app/Model/Article/post.php',
     'App\\Model\\Article\\tag' => $baseDir . '/app/Model/Article/tag.php',
+    'App\\Model\\Posyandu\\posyandu' => $baseDir . '/app/Model/Posyandu/posyandu.php',
+    'App\\Model\\Posyandu\\rw' => $baseDir . '/app/Model/Posyandu/rw.php',
     'App\\Model\\modelUser' => $baseDir . '/app/Model/modelUser.php',
     'App\\Model\\yajra' => $baseDir . '/app/Model/yajra.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',

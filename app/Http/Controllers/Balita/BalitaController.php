@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Balita;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Model\Balita\balita;
 
 class BalitaController extends Controller
 {
@@ -14,7 +15,8 @@ class BalitaController extends Controller
      */
     public function index()
     {
-        return view('balitas.addbalita');
+        $balitas = balita::all();
+        return view('balitas.show', compact('balitas'));
     }
 
     /**
@@ -24,7 +26,7 @@ class BalitaController extends Controller
      */
     public function create()
     {
-        //
+        return view('balitas.addbalita');
     }
 
     /**
@@ -35,7 +37,32 @@ class BalitaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+            'pob' => 'required',
+            //'tanggal_mulai' => 'required|date_format:"d-m-Y"',
+            //'tanggal_berakhir' => 'required|date_format:"d-m-Y"',
+        ]);
+        $dob = date("Y-m-d");
+        $balita = new balita;
+        $balita->nama = $request->nama;
+        $balita->pob = $request->pob;
+        $file = $request->file('foto');
+        if (empty($file)) {
+            $balita->urlfoto = null;
+            $balita->foto = null;
+        } else {
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000, 1001238912) . "." . $ext;
+            $file->move('uploads/foto/', $newName);
+            $balita->foto = $newName;
+            $urlfoto = url('uploads/foto/') . $newName;
+            $balita->urlfoto = $urlfoto;
+        }
+        $balita->dob = $request->dob;
+        $balita->JK = $request->get('jk', 0);
+        $balita->save();
+        return redirect(route('DaftarBalita.index'));
     }
 
     /**
@@ -57,7 +84,8 @@ class BalitaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $balita = balita::where('id', $id)->first();
+        return view('balitas.editbalita', compact('balita'));
     }
 
     /**
@@ -69,7 +97,30 @@ class BalitaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama' => 'required',
+            'pob' => 'required',
+            //'tanggal_mulai' => 'required|date_format:"d-m-Y"',
+            //'tanggal_berakhir' => 'required|date_format:"d-m-Y"',
+        ]);
+        $dob = date("Y-m-d");
+        $balita = balita::find($id);
+        $balita->nama = $request->nama;
+        $balita->pob = $request->pob;
+        if (empty($request->file('foto'))) {
+            $balita->foto = $balita->foto;
+        } else {
+            unlink('uploads/foto/' . $balita->foto); //menghapus file lama
+            $file = $request->file('foto');
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000, 1001238912) . "." . $ext;
+            $file->move('uploads/foto', $newName);
+            $balita->foto = $newName;
+        }
+        $balita->dob = $request->dob;
+        $balita->JK = $request->get('jk', 0);
+        $balita->save();
+        return redirect(route('DaftarBalita.index'));
     }
 
     /**
@@ -80,6 +131,7 @@ class BalitaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        balita::where('id', $id)->delete();
+        return redirect()->back();
     }
 }

@@ -9,12 +9,12 @@
 <div class="container">
     <section>
         <div class="row">
-            <form action="{{route('DaftarBalita.store')}}" method="POST" enctype="multipart/form-data">
-                {{csrf_field()}}
+            <form action="{{route('DaftarBalita.update',$balita->id)}}" method="POST" enctype="multipart/form-data">
+                {{csrf_field()}} {{method_field('PUT')}}
                 <div class="row">
                     <div class="input-field col m8 s12 offset-m2">
                         <i class="material-icons prefix">account_circle</i>
-                        <input id="first" type="text" name="nama" class="validate">
+                        <input id="first" type="text" name="nama" value="{{$balita->nama}}" class="validate">
                         <label for="first">Nama Balita :</label>
                         <span class="helper-text" data-error="wrong" data-success="right"></span>
                     </div>
@@ -22,12 +22,12 @@
                 <div class="row">
                     <div class="input-field col m6 s12">
                         <i class="material-icons prefix">location_on</i>
-                        <input id="dob" name="pob" placeholder="contoh : Bekasi" type="text" class="validate">
+                        <input id="dob" name="pob" placeholder="contoh : Bekasi" value="{{$balita->pob}}" type="text" class="validate">
                         <label for="nama">Tempat Lahir:</label>
                     </div>
                     <div class="input-field col m6 s12">
                         <i class="material-icons prefix">date_range</i>
-                        <input type="text" name="dob" class="datepicker">
+                        <input type="text" name="dob" value="{{$balita->dob}}" class="datepicker">
                         <label>Tanggal Lahir:</label>
                     </div>
                 </div>
@@ -37,14 +37,24 @@
                 </div>
                 <div class="row">
                     <label class="col m3 s6">
-                            <input class="with-gap" value="1" name="jk" type="radio"  />
+                            <input class="with-gap" value="1" name="jk" type="radio"  
+                            @if($balita->JK == 1)
+                            {{'checked'}}
+                            @endif/>
                             <span>Laki-laki</span>
                         </label>
                     <label class="col m3 s6">
-                            <input class="with-gap" value="2" name="jk" type="radio"  />
+                            <input class="with-gap" value="2" name="jk" type="radio"  
+                            @if($balita->JK == 2)
+                            {{'checked'}}
+                            @endif/>
                             <span>Perempuan</span>
                         </label>
                     <div class="file-field input-field col m6 s12">
+                        <div>
+                            <label>Foto Lama:</label>
+                            <img src="{{ url('uploads/foto/'.$balita->foto) }}" style="width: 150px; height: 150px;">
+                        </div>
                         <div class="btn">
                             <span>File</span>
                             <input type="file" name="foto">

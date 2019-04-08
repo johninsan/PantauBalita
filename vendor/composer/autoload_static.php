@@ -496,6 +496,8 @@ class ComposerStaticInit559df08b330f21daccbf0237118fb3fc
         'App\\Model\\Article\\category' => __DIR__ . '/../..' . '/app/Model/Article/category.php',
         'App\\Model\\Article\\post' => __DIR__ . '/../..' . '/app/Model/Article/post.php',
         'App\\Model\\Article\\tag' => __DIR__ . '/../..' . '/app/Model/Article/tag.php',
+        'App\\Model\\Posyandu\\posyandu' => __DIR__ . '/../..' . '/app/Model/Posyandu/posyandu.php',
+        'App\\Model\\Posyandu\\rw' => __DIR__ . '/../..' . '/app/Model/Posyandu/rw.php',
         'App\\Model\\modelUser' => __DIR__ . '/../..' . '/app/Model/modelUser.php',
         'App\\Model\\yajra' => __DIR__ . '/../..' . '/app/Model/yajra.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',

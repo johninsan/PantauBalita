@@ -34,7 +34,7 @@ class HomeController extends Controller
             $data = modelUser::where('username', $username)->first();
             if (count($data) > 0) { //apakah username tersebut ada atau tidak
                 if (Hash::check($password, $data->password)) {
-                    Session::put('username', $data->username);
+                    Session::put('id', $data->id);
                     Session::put('tipe', $data->tipe);
                     Session::put('login', true);
                     return redirect('/')->with('alert-success', '<script> window.onload = swal("Sukses!", "Login berhasil!!", "success")</script>');

@@ -15,7 +15,9 @@
                     </div>
                     <div class="card-content">
                         <h5 class="ligt card-title">{{$post->title}}</h5>
-                        <p>{!! htmlspecialchars_decode(str_limit($post->body,10)) !!}</p>
+                        <p>
+                            @foreach($post->categories as $category)
+                            <a href="{{route('category',$category->slug)}}">{{$category->name}}</a> @endforeach</p>
                     </div>
                     <div class="card-action">
                         <a href="{{route('isi',$post->slug)}}">Baca Disini</a>
@@ -23,6 +25,9 @@
                 </div>
             </div>
             @endforeach
+        </div>
+        <div class="row">
+            {{$posts->links()}}
         </div>
     </div>
 </div>

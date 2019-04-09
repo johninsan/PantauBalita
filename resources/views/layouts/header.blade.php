@@ -1,21 +1,16 @@
-<head>
-  
 @section('headSection') @show
-  <link rel="stylesheet" href="{{ asset('materialize/css/materialize.css') }}">
-  <link rel="stylesheet" href="{{ asset('materialize/css/materialize.min.css') }}">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{{ asset('materialize/css/my.css') }}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="UTF-8">
-  <title>test</title>
-</head>
+<link rel="stylesheet" href="{{ asset('materialize/css/materialize.css') }}">
+<link rel="stylesheet" href="{{ asset('materialize/css/materialize.min.css') }}">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ asset('materialize/css/my.css') }}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>test</title>
 <div class="navbar-fixed">
   <!-- Dropdown Structure -->
   <ul id="dropdown1" class="dropdown-content">
-    <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
     <li><a href="{{route('Posyandu.index')}}">showPosyandu</a></li>
     <li><a href="{{route('showposyandu')}}">showjadwalPosyandu</a></li>
-    <li><a href="{{route('monitor')}}">Monitor</a></li>
     <li><a href="{{route('hasilmonitor')}}">Hasil</a></li>
     <li><a href="{{route('showpost')}}">showpost</a></li>
     <li><a href="{{route('pesandetailortu')}}">pesandetailortu</a></li>
@@ -40,13 +35,15 @@
         <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
           <li><a href="{{ route('home') }}">Home</a></li>
-          <li><a href="{{ route('testyajra') }}">Test Yajra</a></li>
+          {{--
+          <li><a href="{{ route('testyajra') }}">Test Yajra</a></li> --}}
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
           <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a></li>
           @if(!\Illuminate\Support\Facades\Session::get('login'))
           <li><a href="#modal1" class="modal-trigger">Login</a></li>
           <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
           @else
+          <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
           <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">

@@ -46,7 +46,7 @@
 <section id="about" class="about">
 	<div class="container">
 		<div class="row">
-			<h3 class="center light">About StageNow</h3>
+			<h3 class="center light">Tentang PantauBalita</h3>
 			<div class="col m6 light">
 				<h5>We are proffesional</h5>
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab natus inventore eligendi odio, quis voluptatem nostrum aperiam

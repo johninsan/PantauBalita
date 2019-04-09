@@ -6,6 +6,8 @@ Route::post('/registerpost', 'HomeController@registerPost')->name('registerpost'
 //article
 Route::get('isiarticle/{post}', 'FrontController@isipost')->name('isi');
 Route::get('/show', 'FrontController@showpost')->name('showpost');
+Route::get('post/tag/{tag}', 'FrontController@tag')->name('tag');
+Route::get('post/category/{category}', 'FrontController@category')->name('category');
 //posyandus
 Route::get('/showPosyandu', 'FrontController@showposyandu')->name('showposyandu');
 Route::get('/isiposyandu/{id}', 'FrontController@isiposyandu')->name('isiposyandu');

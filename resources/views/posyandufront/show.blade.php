@@ -23,6 +23,9 @@
         </div>
         @endforeach
     </div>
+    <div class="row">
+        {{$posyandus->links()}}
+    </div>
     {{--
     <ul class="pagination">
         <li class="waves-effect"><i class="material-icons">chevron_left</i> {{ $posyandus->links() }}

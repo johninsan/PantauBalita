@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Balita;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Balita\balita;
+use Illuminate\Support\Facades\Session;
 
 class BalitaController extends Controller
 {
@@ -15,7 +16,7 @@ class BalitaController extends Controller
      */
     public function index()
     {
-        $balitas = balita::all();
+        $balitas = balita::where('user_id', Session::get('id'))->get();
         return view('balitas.show', compact('balitas'));
     }
 
@@ -45,6 +46,7 @@ class BalitaController extends Controller
         ]);
         $dob = date("Y-m-d");
         $balita = new balita;
+        $balita->user_id = Session::get('id');
         $balita->nama = $request->nama;
         $balita->pob = $request->pob;
         $file = $request->file('foto');

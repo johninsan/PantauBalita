@@ -29,7 +29,7 @@
         <div class="col m8 s12 tagpart">
             <h5 class="light">Tags:</h5>
             @foreach($post->tags as $tag)
-            <a href="#">{{$tag->name}}</a> @endforeach
+            <a href="{{route('tag',$tag->slug)}}">{{$tag->name}}</a> @endforeach
         </div>
     </div>
 </div>

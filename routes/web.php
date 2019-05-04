@@ -14,8 +14,11 @@ Route::get('/isiposyandu/{id}', 'FrontController@isiposyandu')->name('isiposyand
 //pesan routes
 Route::get('/pesandetailortu', 'PesanController@pesandetailortu')->name('pesandetailortu');
 Route::get('/pesanortu', 'PesanController@pesanortu')->name('pesanortu');
+Route::post('messagePost', 'PesanController@messagePost')->name('messagePost');
+Route::post('messageReply', 'PesanController@messageReply');
 Route::group(['namespace' => 'OrangTua'], function () {
-	Route::get('testyajra', 'OrangTuaController@testyajra')->name('testyajra');
+	Route::get('listpetugas', 'OrangTuaController@showpetugas')->name('showpetugas');
+	Route::get('/isipetugas/{id}', 'OrangTuaController@isipetugas')->name('isipetugas');
 });
 Route::group(['namespace' => 'Balita'], function () {
 	Route::resource('PantauBalita/DaftarBalita', 'BalitaController');

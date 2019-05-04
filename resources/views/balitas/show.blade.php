@@ -1,6 +1,5 @@
 @extends('layouts.app') 
 @section('headSection')
-<link rel="stylesheet" href="{{ asset('materialize/datatable/datatables.min.css') }}">
 @endsection
  
 @section('main-content')
@@ -45,11 +44,4 @@
 @endsection
  
 @section('footerSection')
-<script src="{{ asset('materialize/datatable/datatables.min.js') }}"></script>
-<script type="text/javascript">
-    $(document).ready( function () {
-		$('#myTable').DataTable();
-	} );
-
-</script>
 @endsection

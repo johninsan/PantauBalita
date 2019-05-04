@@ -32,7 +32,7 @@ class HomeController extends Controller
             $password = $request->password;
 
             $data = modelUser::where('username', $username)->first();
-            if (count($data) > 0) { //apakah username tersebut ada atau tidak
+            if ($data->count() > 0) { //apakah username tersebut ada atau tidak
                 if (Hash::check($password, $data->password)) {
                     Session::put('id', $data->id);
                     Session::put('tipe', $data->tipe);

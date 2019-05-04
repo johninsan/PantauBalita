@@ -18,10 +18,11 @@
 <section>
     <div class="container">
         <div class="row">
+            @foreach($pesan as $pesans)
             <table class="highlight centered responsive-table">
                 <thead>
                     <tr>
-                        <th>From</th>
+                        <th>Judul</th>
                         <th>Isi</th>
                         <th>Waktu Masuk</th>
                     </tr>
@@ -29,14 +30,15 @@
 
                 <tbody>
                     <tr>
-                        <td>Insan</td>
+                        <td>{{$pesans->judul}}</td>
                         <td>
-                            <p><a href="#">haha[...]</a></p>
+                            <p><a href="#">{{ substr($pesans->pesan,0,60) }} [...]</a></p>
                         </td>
-                        <td>23 seconds ago</td>
+                        <td>{{ \Carbon\Carbon::createFromTimestamp(strtotime($pesans->created_at))->diffForHumans() }}</td>
                     </tr>
                 </tbody>
             </table>
+            @endforeach
         </div>
     </div>
 </section>

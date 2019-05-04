@@ -44,6 +44,7 @@
           <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
           @else
           <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
+          <li><a href="{{route('showpetugas')}}">list petugas</a></li>
           <li>
             <a href="{{ route('logout') }}" onclick="event.preventDefault();
               document.getElementById('logout-form').submit();">
@@ -61,7 +62,6 @@
 </div>
 <ul class="sidenav" id="mobile-nav">
   <li><a href="{{ route('home') }}">Home</a></li>
-  <li><a href="{{ route('testyajra') }}">Test Yajra</a></li>
   <li><a class="dropdown-trigger" href="#!" data-target="dropdownmobile">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
   <li><a href="#modal1" class="modal-trigger">Login</a></li>
   <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>

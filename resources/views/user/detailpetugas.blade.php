@@ -19,9 +19,9 @@
                 <li class="collection-header">
                     <h4>Data Petugas</h4>
                 </li>
-                <li class="collection-item">{{$petugas->name}}</li>
-                <li class="collection-item">{{$petugas->phone}}</li>
-                <li class="collection-item">{{$petugas->alamat}}</li>
+                <li class="collection-item">Nama : {{$petugas->name}}</li>
+                <li class="collection-item">Telp : {{$petugas->phone}}</li>
+                <li class="collection-item">Alamat : {{$petugas->alamat}}</li>
             </ul>
         </div>
         @if(($countpesan)
@@ -53,7 +53,7 @@
     <div class="col m7 s12">
         <div class="row">
             <div class="card-panel  teal accent-3">
-                <span class="grey-text text-darken-4">Kamu telah mengirimkan pesan, harap tunggu balasan dari petugas. <br><a href="{{route('pesanortu')}}">Klik disini untuk melihat pesan masuk</a>
+                <span class="grey-text text-darken-4">Kamu telah mengirimkan pesan, harap tunggu balasan dari petugas. <br><a href="{{route('pesanortu')}}">Klik disini untuk membuka inbox</a>
                 </span>
             </div>
         </div>

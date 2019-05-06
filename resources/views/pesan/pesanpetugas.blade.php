@@ -24,7 +24,7 @@
             <table class="highlight centered responsive-table">
                 <thead>
                     <tr>
-                        <th>Kepada</th>
+                        <th>Dari</th>
                         <th>Judul</th>
                         <th>Isi</th>
                         <th>Waktu Kirim</th>
@@ -34,12 +34,11 @@
                 <tbody>
                     <tr>
                         <td>
-                            @foreach(\App\Model\modelUser::where('id',$pesans->penerima_id)->get() as $user) {{$user->name}} @endforeach
+                            @foreach(\App\Model\modelUser::where('id',$pesans->pengirim_id)->get() as $user) {{$user->name}} @endforeach
                         </td>
                         <td>{{$pesans->judul}}</td>
                         <td>
-                            <p><a class="tooltipped" data-position="top" data-tooltip="Klik untuk melihat jika ada balasan"
-                                    href="{{route('pesandetailortu',$pesans->kode)}}">{{ substr($pesans->pesan,0,60) }} [...]</a></p>
+                            <p><a class="tooltipped" data-position="top" data-tooltip="Klik untuk melihat percakapan" href="{{route('pesandetailpetugas',$pesans->kode)}}">{{ substr($pesans->pesan,0,60) }} [...]</a></p>
                         </td>
                         <td>{{ \Carbon\Carbon::createFromTimestamp(strtotime($pesans->created_at))->diffForHumans() }}</td>
                     </tr>

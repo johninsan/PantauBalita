@@ -37,6 +37,7 @@
 	});
 	$('.materialboxed').materialbox();
 	$('.sidenav').sidenav();
+	$('.tooltipped').tooltip();
 	$(".dropdown-trigger").dropdown();
 	$('select').formSelect();
 	$('.modal').modal();
@@ -54,6 +55,7 @@
 	// $('.slider').slider();
 
 </script>
+
 
 
 

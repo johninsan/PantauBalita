@@ -12,10 +12,13 @@ Route::get('post/category/{category}', 'FrontController@category')->name('catego
 Route::get('/showPosyandu', 'FrontController@showposyandu')->name('showposyandu');
 Route::get('/isiposyandu/{id}', 'FrontController@isiposyandu')->name('isiposyandu');
 //pesan routes
-Route::get('/pesandetailortu', 'PesanController@pesandetailortu')->name('pesandetailortu');
+Route::get('pesan/detail/{kode}', 'PesanController@getDetailMessageOrtu')->name('pesandetailortu');
+Route::get('pesanpetugas/detail/{kode}', 'PesanController@getDetailMessagePetugas')->name('pesandetailpetugas');
 Route::get('/pesanortu', 'PesanController@pesanortu')->name('pesanortu');
+Route::get('/pesanpetugas', 'PesanController@pesanpetugas')->name('pesanpetugas');
 Route::post('messagePost', 'PesanController@messagePost')->name('messagePost');
-Route::post('messageReply', 'PesanController@messageReply');
+Route::post('messageReply', 'PesanController@messageReply')->name('messageReply');
+//actor routes
 Route::group(['namespace' => 'OrangTua'], function () {
 	Route::get('listpetugas', 'OrangTuaController@showpetugas')->name('showpetugas');
 	Route::get('/isipetugas/{id}', 'OrangTuaController@isipetugas')->name('isipetugas');

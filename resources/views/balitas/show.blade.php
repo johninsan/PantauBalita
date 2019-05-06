@@ -8,7 +8,7 @@
 </section>
 <div class="container">
     <div class="row">
-        <a href="{{route('DaftarBalita.create')}}" class="pink lighten-effect deep-orange lighten-1 btn col m2 s12 z-depth-3"><i class="material-icons right">add</i>Tambah</a>
+        <a data-position="bottom" data-tooltip="Klik untuk mendaftarkan balita" href="{{route('DaftarBalita.create')}}" class="tooltipped pink lighten-effect deep-orange lighten-1 btn col m2 s12 z-depth-3"><i class="material-icons right">add</i>Daftar</a>
     </div>
     <div class="row">
         @foreach($balitas as $balita)
@@ -22,12 +22,12 @@
                     <p>{{$balita ->JK? 'Laki-laki' : 'Perempuan'}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="{{route('monitor')}}"><i class="material-icons">computer</i></a>
-                    <a href="{{route('DaftarBalita.edit',$balita ->id)}}"><i class="material-icons">edit</i></a>
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('monitor')}}"><i class="material-icons">computer</i></a>
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk mengubah data" href="{{route('DaftarBalita.edit',$balita ->id)}}"><i class="material-icons">edit</i></a>
                     <form method="post" id="delete-form-{{$balita->id}}" action="{{route('DaftarBalita.destroy',$balita ->id)}}" style="display: none">
                         {{csrf_field()}} {{method_field('DELETE')}}
                     </form>
-                    <a href="" onclick="
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk menghapus data" href="" onclick="
                             if(confirm('Are you sure?'))
                             {
                             event.preventDefault();document.getElementById('delete-form-{{$balita->id}}').submit();

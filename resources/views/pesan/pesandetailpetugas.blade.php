@@ -10,7 +10,7 @@
                 <h4 class="light grey-text text-darken-3">Pesan</h4>
             </div>
             <div class="col m6 s12">
-                <h5 class="light grey-text text-darken-3 right">Hello</h5>
+                <h5 class="light grey-text text-darken-3 right">Hello, Isma</h5>
             </div>
         </div>
     </div>
@@ -71,7 +71,7 @@
             <div class="row">
                 <div class="input-field col m8 s6">
                     <p>Judul :</p>
-                    <input id="modal_judul" name="judul" type="text" class="validate" readonly>
+                    <input id="modal_judul" name="judul" type="text" class="validate">
                     <input id="modal_idpenerima" name="idPenerima" type="hidden">
                     <input id="modal_kode" name="kode" type="hidden">
                 </div>

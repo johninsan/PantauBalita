@@ -8,18 +8,23 @@
 <title>test</title>
 <div class="navbar-fixed">
   <!-- Dropdown Structure -->
-  <ul id="dropdown1" class="dropdown-content">
-    <li><a href="{{route('Posyandu.index')}}">showPosyandu</a></li>
-    <li><a href="{{route('showposyandu')}}">showjadwalPosyandu</a></li>
-    <li><a href="{{route('hasilmonitor')}}">Hasil</a></li>
-    <li><a href="{{route('showpost')}}">showpost</a></li>
-    <li><a href="{{route('pesandetailortu')}}">pesandetailortu</a></li>
-    <li><a href="{{route('pesanortu')}}">pesanortu</a></li>
-  </ul>
   <ul class="dropdown-content" id="dropdownarticle">
     <li><a href="{{route('post.index')}}">Articlepost</a></li>
     <li><a href="{{route('tag.index')}}">tag</a></li>
     <li><a href="{{route('category.index')}}">category</a></li>
+  </ul>
+  <ul class="dropdown-content" id="dropdownprofile">
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanpetugas')}}"><i class="material-icons small ">mail</i>inbox</a></li>
+    <li class="divider"></li>
+    <li>
+      <a href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+             Logout
+         </a>
+      <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
+    </li>
   </ul>
   <ul id="dropdownmobile" class="dropdown-content">
     <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
@@ -31,29 +36,22 @@
   <nav class="teal darken-1">
     <div class="container">
       <div class="nav-wrapper">
-        <a href="#!" class="brand-logo">PantauBalita</a>
+        <a href="{{ route('home') }}" class="brand-logo">PantauBalita</a>
         <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="{{ route('home') }}">Home</a></li>
           {{--
           <li><a href="{{ route('testyajra') }}">Test Yajra</a></li> --}}
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat jadwal posyandu" href="{{route('showposyandu')}}">Jadwal</a></li>
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membaca artikel" href="{{route('showpost')}}">Artikel</a></li>
           @if(!\Illuminate\Support\Facades\Session::get('login'))
           <li><a href="#modal1" class="modal-trigger">Login</a></li>
           <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
           @else
-          <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk mendaftarkan balita" href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
           <li><a href="{{route('showpetugas')}}">list petugas</a></li>
-          <li>
-            <a href="{{ route('logout') }}" onclick="event.preventDefault();
-              document.getElementById('logout-form').submit();">
-               Logout
-           </a>
-            <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
-              {{ csrf_field() }}
-            </form>
-          </li>
+          <li><a href="{{route('Posyandu.index')}}">Buat Jadwal</a></li>
+          <li><a class="dropdown-trigger" data-target="dropdownprofile" href="#"><i class="material-icons">more_vert</i></a></li>
           @endif
         </ul>
       </div>
@@ -74,7 +72,7 @@
       <h4>Login</h4>
       <p>Masukkan Username dan Password</p>
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col m8 s6">
           <i class="material-icons prefix">account_circle</i>
           <input id="uname" name="username" type="text" class="validate">
           <label for="uname">Username</label>
@@ -82,7 +80,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s6">
+        <div class="input-field col m8 s6">
           <i class="material-icons prefix">lock</i>
           <input placeholder="Minimal 6 digit" name="password" id="myPass" type="password" class="validate">
           <label for="first_name">Password</label>

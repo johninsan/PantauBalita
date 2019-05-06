@@ -11,30 +11,29 @@ use Illuminate\Support\Facades\DB;
 
 class PesanController extends Controller
 {
-    public function pesandetailortu()
+    public function getDetailMessageOrtu($kode)
     {
-        return view('user.pesandetailortu');
+        $getPesan = Pesan::where('kode', $kode)->orderBy('created_at', 'desc')->get();
+        return view('user.pesandetailortu', compact('getPesan'));
     }
+    public function getDetailMessagePetugas($kode)
+    {
+        $getPesan = Pesan::where('kode', $kode)->orderBy('created_at', 'desc')->get();
+        return view('pesan.pesandetailpetugas', compact('getPesan'));
+    }
+
     public function pesanortu()
     {
         $pesan = Pesan::where('pengirim_id', Session::get('id'))->groupBy('kode')->orderBy('created_at', 'desc')->get();
-        // try {
-        //     $pesan = DB::table('pesan')
-        //         ->select('id', 'penerima_id', 'pengirim_id', 'judul', 'pesan', 'created_at', 'kode')
-        //         ->where('pengirim_id', Session::get('id'))
-        //         ->groupBy('kode')
-        //         ->orderBy('created_at', 'desc')
-        //         ->get();
-
-        //     $data = [
-        //         'pesan' => $pesan
-        //     ];
         return view('user.pesanortu', compact('pesan'));
-
-        // } catch (Exception $e) {
-        //     return response($e->getMessage());
-        // }
     }
+
+    public function pesanpetugas()
+    {
+        $pesan = Pesan::where('penerima_id', Session::get('id'))->groupBy('kode')->orderBy('created_at', 'desc')->get();
+        return view('pesan.pesanpetugas', compact('pesan'));
+    }
+
     public function messagePost(Request $request)
     {
         $header = new PesanHeader();
@@ -55,23 +54,12 @@ class PesanController extends Controller
 
     public function messageReply(Request $request)
     {
-        $data = new modelPesan();
-        $data->acara_id = $request->idAcara;
+        $data = new Pesan();
+        $data->kode = $request->kode;
+        $data->judul = $request->judul;
         $data->pengirim_id = Session::get('id');
         $data->penerima_id = $request->idPenerima;
-        $data->kode = $request->kode;
         $data->pesan = $request->message;
-        $file = $request->file('lampiran');
-        if (!empty($file)) {
-            $ext = $file->getClientOriginalExtension();
-            $name = time() . '.' . $ext;
-            $file->move('uploads/acara/', $name);
-            $data->lampiran = $name;
-            $data->url_lampiran = url('uploads/acara') . "/" . $name;
-        } else {
-            $data->lampiran = null;
-            $data->url_lampiran = null;
-        }
         $data->save();
         return back()->with('alert-success', '<script> window.onload = swal("Sukses!", "Pesan anda telah terkirim!", "success")</script>');
     }

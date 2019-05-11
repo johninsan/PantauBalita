@@ -8,6 +8,15 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    protected $table = 'users';
+    public function roles()
+    {
+        return $this->belongsToMany('App\Model\role');
+    }
+    // public function petugass()
+    // {
+    //     return $this->belongsToMany('App\Model\role', 'role_user')->where('role_id', 2)->orderBy('created_at', 'DESC')->paginate(6);
+    // }
     use Notifiable;
 
     /**
@@ -15,9 +24,9 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'username', 'email', 'password',
-    ];
+    // protected $fillable = [
+    //     'name', 'username', 'email', 'password',
+    // ];
 
     /**
      * The attributes that should be hidden for arrays.

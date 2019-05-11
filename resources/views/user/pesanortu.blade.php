@@ -34,7 +34,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            @foreach(\App\Model\modelUser::where('id',$pesans->penerima_id)->get() as $user) {{$user->name}} @endforeach
+                            @foreach(\App\User::where('id',$pesans->penerima_id)->get() as $user) {{$user->name}} @endforeach
                         </td>
                         <td>{{$pesans->judul}}</td>
                         <td>

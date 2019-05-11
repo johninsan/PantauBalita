@@ -51,10 +51,10 @@
 					<label for="alamat">Alamat:</label>
 				</div>
 				<div class="input-field col m6 s12">
-					<select name="tipe">
+					<select name="role[]">
 						  <option value="" disabled selected>Pilih salah satu</option>
-						  <option value="1">Orang Tua</option>
-						  <option value="2">Petugas Kesehatan</option>
+						  @foreach($roles as $role)
+                        <option value="{{$role->id}}">{{$role->name}}</option>@endforeach
 						</select>
 					<label>Siapakah anda?</label>
 				</div>

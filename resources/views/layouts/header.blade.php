@@ -9,13 +9,22 @@
 <div class="navbar-fixed">
   <!-- Dropdown Structure -->
   <ul class="dropdown-content" id="dropdownarticle">
+    @can('roles.article',Auth::user())
     <li><a href="{{route('post.index')}}">Articlepost</a></li>
+    @endcan @can('roles.tag',Auth::user())
     <li><a href="{{route('tag.index')}}">tag</a></li>
+    @endcan @can('roles.category',Auth::user())
     <li><a href="{{route('category.index')}}">category</a></li>
+    @endcan
   </ul>
   <ul class="dropdown-content" id="dropdownprofile">
+    @can('roles.inboxpetugas',Auth::user())
     <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanpetugas')}}"><i class="material-icons small ">mail</i>inbox</a></li>
     <li class="divider"></li>
+    @endcan @can('roles.inboxortu',Auth::user())
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanortu')}}"><i class="material-icons small ">mail</i>inbox</a></li>
+    <li class="divider"></li>
+    @endcan
     <li>
       <a href="{{ route('logout') }}" onclick="event.preventDefault();
             document.getElementById('logout-form').submit();">
@@ -41,17 +50,21 @@
         <ul class="right hide-on-med-and-down">
           {{--
           <li><a href="{{ route('testyajra') }}">Test Yajra</a></li> --}}
-          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat jadwal posyandu" href="{{route('showposyandu')}}">Jadwal</a></li>
-          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membaca artikel" href="{{route('showpost')}}">Artikel</a></li>
-          @if(!\Illuminate\Support\Facades\Session::get('login'))
-          <li><a href="#modal1" class="modal-trigger">Login</a></li>
-          <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
-          @else
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat jadwal posyandu" href="{{route('showposyandu')}}">JADWAL</a></li>
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membaca artikel" href="{{route('showpost')}}">ARTIKEL</a></li>
+          @if(Auth::user()) @can('roles.article',Auth::user())
           <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a></li>
+          @endcan @can('roles.balita',Auth::user())
           <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk mendaftarkan balita" href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
-          <li><a href="{{route('showpetugas')}}">list petugas</a></li>
+          @endcan @can('roles.posyandu',Auth::user())
           <li><a href="{{route('Posyandu.index')}}">Buat Jadwal</a></li>
+          @endcan @can('roles.inboxortu',Auth::user())
+          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a></li>
+          @endcan
           <li><a class="dropdown-trigger" data-target="dropdownprofile" href="#"><i class="material-icons">more_vert</i></a></li>
+          @else
+          <li><a href="#modal1" class="modal-trigger">LOGIN</a></li>
+          <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
           @endif
         </ul>
       </div>
@@ -65,7 +78,7 @@
   <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
 </ul>
 
-<form action="/loginpost" method="post">
+<form action="{{route('login')}}" method="post">
   {{csrf_field()}}
   <div id="modal1" class="modal modal-fixed-footer">
     <div class="modal-content">

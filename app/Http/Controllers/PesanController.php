@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Pesan\PesanHeader;
 use App\Pesan\Pesan;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Mockery\Exception;
 use Illuminate\Support\Facades\DB;
@@ -24,13 +25,13 @@ class PesanController extends Controller
 
     public function pesanortu()
     {
-        $pesan = Pesan::where('pengirim_id', Session::get('id'))->groupBy('kode')->orderBy('created_at', 'desc')->get();
+        $pesan = Pesan::where('pengirim_id', Auth::user()->id)->groupBy('kode')->orderBy('created_at', 'desc')->get();
         return view('user.pesanortu', compact('pesan'));
     }
 
     public function pesanpetugas()
     {
-        $pesan = Pesan::where('penerima_id', Session::get('id'))->groupBy('kode')->orderBy('created_at', 'desc')->get();
+        $pesan = Pesan::where('penerima_id', Auth::user()->id)->groupBy('kode')->orderBy('created_at', 'desc')->get();
         return view('pesan.pesanpetugas', compact('pesan'));
     }
 
@@ -44,7 +45,7 @@ class PesanController extends Controller
             $data = new Pesan();
             $data->kode = $kode;
             $data->judul = $request->judul;
-            $data->pengirim_id = Session::get('id');
+            $data->pengirim_id = Auth::user()->id;
             $data->penerima_id = $request->idPenerima;
             $data->pesan = $request->message;
             $data->save();
@@ -57,7 +58,7 @@ class PesanController extends Controller
         $data = new Pesan();
         $data->kode = $request->kode;
         $data->judul = $request->judul;
-        $data->pengirim_id = Session::get('id');
+        $data->pengirim_id = Auth::user()->id;
         $data->penerima_id = $request->idPenerima;
         $data->pesan = $request->message;
         $data->save();

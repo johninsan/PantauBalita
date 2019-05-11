@@ -32,8 +32,9 @@
             <input type="hidden" id="kode" value="{{ $x->kode }}" />
             <input type="hidden" id="judul" value="{{ $x->judul }}" />
         </div>
-        @foreach(\App\Model\modelUser::where('id',$x->pengirim_id)->get() as $users) @if($x->pengirim_id != \Illuminate\Support\Facades\Session::get('id'))
+        @foreach(\App\User::where('id',$x->pengirim_id)->get() as $users) @if($x->pengirim_id != Auth::user()->id)
         <div class="row">
+            <input type="hidden" id="namaUser" value="{{ $users->name }}" />
             <div class="col m6 s12 offset-m5">
                 <div class="card-panel center teal lighten-3">
                     <h5 class="center light grey-text text-darken-3">{{$users->name}} - <small>{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans()}}</small>
@@ -45,7 +46,6 @@
         @else
         <div class="row">
             <div class="col m6 s12">
-                <input type="hidden" id="namaUser" value="{{ $users->name }}" />
                 <div class="card-panel center indigo lighten-3">
                     <h5 class="center light grey-text text-darken-3">You({{$users->name}}) - <small>{{ \Carbon\Carbon::createFromTimestamp(strtotime($x->created_at))->diffForHumans()}}</small>
                     </h5>

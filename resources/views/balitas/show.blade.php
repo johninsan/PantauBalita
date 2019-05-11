@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-content">
                     <h5 class="ligt card-title">{{$balita->nama}}</h5>
-                    <p>{{$balita ->JK? 'Laki-laki' : 'Perempuan'}}</p>
+                    <p>{{$balita ->JK? 'Perempuan' : 'Laki-laki'}}</p>
                 </div>
                 <div class="card-action">
                     <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('monitor')}}"><i class="material-icons">computer</i></a>

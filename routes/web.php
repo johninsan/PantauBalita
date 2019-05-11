@@ -1,7 +1,6 @@
 <?php
 Route::get('/', 'HomeController@index')->name('home');
 //auth routes
-Route::post('/loginpost', 'HomeController@loginpost');
 Route::post('/registerpost', 'HomeController@registerPost')->name('registerpost');
 //article
 Route::get('isiarticle/{post}', 'FrontController@isipost')->name('isi');
@@ -36,7 +35,16 @@ Route::group(['namespace' => 'post'], function () {
 	Route::resource('PantauBalita/tag', 'TagController');
 	Route::resource('PantauBalita/category', 'CategoryController');
 });
+//admin routes
+Route::group(['namespace' => 'Admin'], function () {
+	Route::post('/loginpost', 'loginController@loginpost');
+	Route::get('admin-login', 'loginController@adminlogin');
+	Route::get('admin/home', 'loginController@index');
+	Route::resource('admin/role', 'RoleController');
+	Route::resource('admin/permission', 'PermissionController');
+});
 // Route::get('/', function () {
 //     return view('homepage.home');
 // });
+
 Auth::routes();

@@ -37,7 +37,8 @@ Route::group(['namespace' => 'post'], function () {
 });
 //admin routes
 Route::group(['namespace' => 'Admin'], function () {
-	Route::post('/loginpost', 'loginController@loginpost');
+	Route::post('/loginpost', 'loginController@loginpost')->name('loginpost');
+	Route::post('/adminlogout', 'loginController@adminlogout')->name('adminlogout');
 	Route::get('admin-login', 'loginController@adminlogin');
 	Route::get('admin/home', 'loginController@index');
 	Route::resource('admin/role', 'RoleController');

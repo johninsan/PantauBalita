@@ -9,35 +9,27 @@
 <div class="slider">
 	<ul class="slides">
 		<li>
-			<img src="/materialize/images/img/slider/1.png">
+			<img src="/materialize/images/img/slider/1.jpg">
 			<!-- random image -->
 			<div class="caption center-align">
-				<h3>This is our big Tagline!</h3>
-				<h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+				<h3>Jaga Balita Anda!</h3>
+				<h5 class="light grey-text text-lighten-3">Pantau gizi dimana saja.</h5>
 			</div>
 		</li>
 		<li>
-			<img src="/materialize/images/img/slider/2.png">
+			<img src="/materialize/images/img/slider/2.jpg">
 			<!-- random image -->
 			<div class="caption left-align">
-				<h3>Left Aligned Caption</h3>
-				<h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+				<h3>Tanya ahli!</h3>
+				<h5 class="light grey-text text-lighten-3">Bertanya kapanpun dimanapun.</h5>
 			</div>
 		</li>
 		<li>
-			<img src="/materialize/images/img/slider/3.png">
+			<img src="/materialize/images/img/slider/3.jpg">
 			<!-- random image -->
 			<div class="caption right-align">
-				<h3>Right Aligned Caption</h3>
-				<h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
-			</div>
-		</li>
-		<li>
-			<img src="/materialize/images/img/slider/4.png">
-			<!-- random image -->
-			<div class="caption center-align">
-				<h3>This is our big Tagline!</h3>
-				<h5 class="light grey-text text-lighten-3">Here's our small slogan.</h5>
+				<h3>Artikel Menarik</h3>
+				<h5 class="light grey-text text-lighten-3">Tambah wawasan anda untuk balita!</h5>
 			</div>
 		</li>
 	</ul>
@@ -48,22 +40,23 @@
 		<div class="row">
 			<h3 class="center light">Tentang PantauBalita</h3>
 			<div class="col m6 light">
-				<h5>We are proffesional</h5>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab natus inventore eligendi odio, quis voluptatem nostrum aperiam
-					quae nobis velit earum fugit totam, cum dolores nisi, dolorem alias molestiae? Aliquid.</p>
+				<h5>Apa itu PantauBalita?</h5>
+				<p>Aplikasi yang siap membantu anda untuk menjaga kesehatan gizi balita, memberikan jadwal posyandu terbaru, memberikan
+					artikel menarik untuk membantu wawasan kesehatan balita, anda juga dapat bertanya kepada ahli jika ada masalah pada
+					balita anda !.</p>
 			</div>
-			<div class="col m6">
-				<p>Free</p>
+			<div class="col m6 s12">
+				<p>Akurat</p>
 				<div class="progress">
-					<div class="determinate" style="width: 70%"></div>
+					<div class="determinate" style="width: 90%"></div>
 				</div>
-				<p>Project Deal</p>
+				<p>Ahli</p>
 				<div class="progress">
-					<div class="determinate" style="width: 70%"></div>
+					<div class="determinate" style="width: 90%"></div>
 				</div>
-				<p>Musisi terpercaya</p>
+				<p>Terpercaya</p>
 				<div class="progress">
-					<div class="determinate" style="width: 70%"></div>
+					<div class="determinate" style="width: 90%"></div>
 				</div>
 			</div>
 		</div>
@@ -79,7 +72,7 @@
 				<img src="materialize/images/img/clients/process1.jpg">
 			</div>
 			<div class="col m4 s12 center">
-				<img src="materialize/images/img/clients/process2.jpg">
+				<img src="materialize/images/img/clients/process2.png">
 			</div>
 			<div class="col m4 s12 center">
 				<img src="materialize/images/img/clients/process3.jpg">
@@ -95,28 +88,28 @@
 			<div class="col m4 s12">
 				<div class="card-panel center">
 					<i class="material-icons medium">thumb_up</i>
-					<h5>Connected</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, dolorum.</p>
+					<h5>Terpercaya</h5>
+					<p>Data yang kami berikan adalah hasil akurat melalui perhitungan algoritma yang rumit.</p>
 				</div>
 			</div>
 			<div class="col m4 s12">
 				<div class="card-panel center">
 					<i class="material-icons medium">security</i>
 					<h5>Privacy</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, dolorum.</p>
+					<p>Kami menjamin dan menjaga seluruh data pribadi client yang telah terdaftar di kami.</p>
 				</div>
 			</div>
 			<div class="col m4 s12">
 				<div class="card-panel center">
-					<i class="material-icons medium">access_alarms</i>
-					<h5>Message Reminder</h5>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque, dolorum.</p>
+					<i class="material-icons medium">chat</i>
+					<h5>Tanya</h5>
+					<p>Tanya kepada ahli langsung jika anda ingin tau kesehatan balita anda.</p>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-{{-- portofolio --}}
+{{-- portofolio --}} {{--
 <section id="portfolio" class="portfolio">
 	<div class="container">
 		<h3 class="center light grey-text text-darken-3">Portfolio</h3>
@@ -149,9 +142,8 @@
 			</div>
 		</div>
 	</div>
-</section>
-{{-- contact --}}
-<section id="contact" class="contact grey lighten-3">
+</section> --}} {{-- contact --}}
+<section id="contact" class="portofolio">
 	<div class="container">
 		<div class="row">
 			<h3 class="center light grey-text text-darken-3">Contact Us</h3>

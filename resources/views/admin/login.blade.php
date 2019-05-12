@@ -35,6 +35,8 @@
         }
     </style>
 </head>
+@if(\Illuminate\Support\Facades\Session::has('alert-success')) {!! \Illuminate\Support\Facades\Session::get('alert-success')
+!!} @endif
 
 <body>
     <div class="section"></div>
@@ -45,7 +47,8 @@
             <div class="container">
                 <div class="z-depth-1 grey lighten-4 row" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
-                    <form action="#" method="post">
+                    <form action="{{route('loginpost')}}" method="post">
+                        {{csrf_field()}}
                         <div class='row'>
                             <div class='col s12'>
                             </div>
@@ -53,8 +56,8 @@
 
                         <div class='row'>
                             <div class='input-field col m12 s12'>
-                                <input class='validate' type='email' name='email' id='email' />
-                                <label for='email'>Masukkan username</label>
+                                <input class='validate' type='text' name='username' id='username' />
+                                <label for='username'>Masukkan username</label>
                             </div>
                         </div>
 

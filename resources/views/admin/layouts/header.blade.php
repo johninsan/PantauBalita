@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="{{ asset('materialize/css/materialize.min.css') }}">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="{{ asset('materialize/css/my.css') }}">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
 <title>test</title>
@@ -24,7 +26,7 @@
                   document.getElementById('logout-form').submit();">
                    Logout
                </a>
-            <form id="logout-form" action="#" method="POST" style="display: none;">
+            <form id="logout-form" action="{{route('adminlogout')}}" method="POST" style="display: none;">
               {{ csrf_field() }}
             </form>
           </li>

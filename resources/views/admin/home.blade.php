@@ -2,7 +2,8 @@
 @section('headSection')
 @endsection
  
-@section('main-content')
+@section('main-content') @if(\Illuminate\Support\Facades\Session::has('alert-success'))
+{!! \Illuminate\Support\Facades\Session::get('alert-success') !!} @endif
 <section class="grey lighten-3">
     <h3 class="grey-text light center">Admin Page</h3>
 </section>

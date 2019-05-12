@@ -51,15 +51,21 @@
           {{--
           <li><a href="{{ route('testyajra') }}">Test Yajra</a></li> --}}
           <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat jadwal posyandu" href="{{route('showposyandu')}}">JADWAL</a></li>
+
           <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membaca artikel" href="{{route('showpost')}}">ARTIKEL</a></li>
+
           @if(Auth::user()) @can('roles.article',Auth::user())
-          <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a></li>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a>
+          </li>
           @endcan @can('roles.balita',Auth::user())
-          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk mendaftarkan balita" href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
-          @endcan @can('roles.posyandu',Auth::user())
-          <li><a href="{{route('Posyandu.index')}}">Buat Jadwal</a></li>
+          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membuka menu balita" href="{{route('DaftarBalita.index')}}">BALITA</a>
+          </li>
+          @endcan {{-- Buat jadwal --}} @can('roles.posyandu',Auth::user())
+          <li><a href="{{route('Posyandu.index')}}">Buat Jadwal</a>
+          </li>
           @endcan @can('roles.inboxortu',Auth::user())
-          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a></li>
+          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a>
+          </li>
           @endcan
           <li><a class="dropdown-trigger" data-target="dropdownprofile" href="#"><i class="material-icons">more_vert</i></a></li>
           @else

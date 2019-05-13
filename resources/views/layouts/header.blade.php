@@ -19,10 +19,10 @@
   </ul>
   <ul class="dropdown-content" id="dropdownprofile">
     @can('roles.inboxpetugas',Auth::user())
-    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanpetugas')}}"><i class="material-icons small ">mail</i>inbox</a></li>
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanpetugas')}}"><i class="material-icons small ">mail</i>Pesan</a></li>
     <li class="divider"></li>
     @endcan @can('roles.inboxortu',Auth::user())
-    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanortu')}}"><i class="material-icons small ">mail</i>inbox</a></li>
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanortu')}}"><i class="material-icons small ">mail</i>Pesan</a></li>
     <li class="divider"></li>
     @endcan
     <li>
@@ -58,13 +58,13 @@
           <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticle">Buat Article<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           @endcan @can('roles.balita',Auth::user())
-          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membuka menu balita" href="{{route('DaftarBalita.index')}}">BALITA</a>
+          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('DaftarBalita.index')}}">BALITA</a>
           </li>
           @endcan {{-- Buat jadwal --}} @can('roles.posyandu',Auth::user())
-          <li><a href="{{route('Posyandu.index')}}">Buat Jadwal</a>
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membuat jadwal posyandu" href="{{route('Posyandu.index')}}">Buat Jadwal</a>
           </li>
           @endcan @can('roles.inboxortu',Auth::user())
-          <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a>
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a>
           </li>
           @endcan
           <li><a class="dropdown-trigger" data-target="dropdownprofile" href="#"><i class="material-icons">more_vert</i></a></li>

@@ -10,7 +10,7 @@
                 <h4 class="light grey-text text-darken-3">Pesan</h4>
             </div>
             <div class="col m6 s12">
-                <h5 class="light grey-text text-darken-3 right">Hello</h5>
+                <h5 class="light grey-text text-darken-3 right">Hello, {{Auth::user()->name}}</h5>
             </div>
         </div>
     </div>
@@ -27,8 +27,7 @@
         </div>
         @foreach($getPesan as $x)
         <div class="row">
-            <input type="hidden" id="idPenerima" value="{{ $x->penerima_id }}" />
-            <input type="hidden" id="idPengirim" value="{{ $x->pengirim_id }}" />
+            <input type="hidden" id="idPenerima" value="{{ $x->pengirim_id }}" />
             <input type="hidden" id="kode" value="{{ $x->kode }}" />
             <input type="hidden" id="judul" value="{{ $x->judul }}" />
         </div>
@@ -72,7 +71,7 @@
                 <div class="input-field col m8 s6">
                     <p>Judul :</p>
                     <input id="modal_judul" name="judul" type="text" class="validate" readonly>
-                    <input id="modal_idpenerima" name="idPenerima" type="hidden">
+                    <input id="modal_idpenerima" name="idPenerima" type="text">
                     <input id="modal_kode" name="kode" type="hidden">
                 </div>
             </div>

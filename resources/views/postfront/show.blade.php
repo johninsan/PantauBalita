@@ -14,9 +14,8 @@
                         <img src="{{ Storage::disk('local')->url($post->image) }}">
                     </div>
                     <div class="card-content">
-                        <h5 class="ligt card-title">{{$post->title}}</h5>
-                        <p>
-                            @foreach($post->categories as $category)
+                        <h5 class="ligt card-title">Judul :{{$post->title}}</h5>
+                        <p>Category: @foreach($post->categories as $category)
                             <a href="{{route('category',$category->slug)}}">{{$category->name}}</a> @endforeach</p>
                     </div>
                     <div class="card-action">

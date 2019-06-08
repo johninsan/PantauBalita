@@ -22,7 +22,7 @@
                     <p>{{$balita ->JK? 'Perempuan' : 'Laki-laki'}}</p>
                 </div>
                 <div class="card-action">
-                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('monitor')}}"><i class="material-icons">computer</i></a>
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('monitor',$balita->id)}}"><i class="material-icons">computer</i></a>
                     <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk mengubah data" href="{{route('DaftarBalita.edit',$balita ->id)}}"><i class="material-icons">edit</i></a>
                     <form method="post" id="delete-form-{{$balita->id}}" action="{{route('DaftarBalita.destroy',$balita ->id)}}" style="display: none">
                         {{csrf_field()}} {{method_field('DELETE')}}

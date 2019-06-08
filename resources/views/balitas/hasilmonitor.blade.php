@@ -16,7 +16,6 @@
                 <li class="collection-header">
                     <h5>Keterangan Balita:</h5>
                 </li>
-                <li class="collection-item">Tinggi Badan: 120cm</li>
                 <li class="collection-item">Berat Badan: 6Kg</li>
                 <li class="collection-item">Umur : 6 Bulan</li>
                 <li class="collection-item">Jenis Kelamin : Laki-laki</li>
@@ -26,7 +25,8 @@
 </div>
 <div class="row">
     <section class="grey lighten-3">
-        <h4 class="light center grey-text text-darken-3">Kondisi gizi balita saat ini adalah: Sehat</h4>
+        <h4 class="light center grey-text text-darken-3">Kondisi gizi balita saat ini adalah:@foreach($monitors as $monitor) @if ($monitor->hasil >= 0.25 && $monitor->hasil
+            <=0.4 ) Kurang Gizi @endif @endforeach</h4>
     </section>
 </div>
 <div class="container">

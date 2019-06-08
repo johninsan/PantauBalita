@@ -39,7 +39,7 @@ class MonitorController extends Controller
             ->addMembership('fase10', 'trapmf', [51, 54, 60, 60]);
         $fuzzy->input()->addCategory('BeratBadan')
             ->addMembership('kb', 'trapmf', [0, 0, 5, 7])
-            ->addMembership('n', 'trapmf', [5, 7, 11, 33])
+            ->addMembership('n', 'trapmf', [5, 7, 11, 13])
             ->addMembership('bl', 'trapmf', [11, 13, 16, 18])
             ->addMembership('bo', 'trapmf', [16, 18, 28, 28]);
         $fuzzy->output()->addCategory('gizi')
@@ -180,10 +180,23 @@ class MonitorController extends Controller
             'BeratBadan' => $berat
         ]);
         $monitor = new monitor();
+        $kode = str_random(30);
         $monitor->balita_id = $request->balita_id;
+        $monitor->kode = $kode;
         $monitor->beratbadan = $berat;
         $monitor->umur = $umur;
         $monitor->hasil = $total;
+        if ($total <= "0.25") {
+            $monitor->gb = 1;
+        } elseif ($total >= "0.25" && $total <= "0.4") {
+            $monitor->gk = 1;
+        } elseif ($total >= "0.4" && $total <= "0.55") {
+            $monitor->s = 1;
+        } elseif ($total >= "0.55" && $total <= "0.7") {
+            $monitor->gl = 1;
+        } elseif ($total >= "0.7") {
+            $monitor->o = 1;
+        }
         $monitor->save();
         return redirect(route('hasilmonitor'));
         //return view('balitas.hasilmonitor', compact('total'));

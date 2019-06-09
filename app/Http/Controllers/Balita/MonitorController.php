@@ -15,9 +15,9 @@ class MonitorController extends Controller
         $balitas = balita::where('id', $id)->get();
         return view('balitas.monitor', compact('balitas'));
     }
-    public function hasilmonitor()
+    public function hasilmonitor($kode)
     {
-        $monitors = monitor::all();
+        $monitors = monitor::where('kode', $kode)->get();
         return view('balitas.hasilmonitor', compact('monitors'));
     }
 
@@ -25,6 +25,7 @@ class MonitorController extends Controller
     {
         $berat = $request->Berat;
         $umur = $request->umur;
+        $jk = $request->jk;
         $fuzzy = new Fuzzy("Gizi", "Tsukamoto");
         $fuzzy->input()->addCategory('umur')
             ->addMembership('fase1', 'trapmf', [0, 0, 3, 6])
@@ -198,7 +199,7 @@ class MonitorController extends Controller
             $monitor->o = 1;
         }
         $monitor->save();
-        return redirect(route('hasilmonitor'));
+        return redirect(route('hasilmonitor', ['kode' => $kode]));
         //return view('balitas.hasilmonitor', compact('total'));
     }
 }

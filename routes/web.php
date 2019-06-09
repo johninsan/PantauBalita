@@ -25,7 +25,7 @@ Route::group(['namespace' => 'OrangTua'], function () {
 Route::group(['namespace' => 'Balita'], function () {
 	Route::resource('PantauBalita/DaftarBalita', 'BalitaController');
 	Route::get('/monitorBalita/{id}', 'MonitorController@index')->name('monitor');
-	Route::get('HasilMonitorBalita', 'MonitorController@hasilmonitor')->name('hasilmonitor');
+	Route::get('/HasilMonitorBalita/{kode}', 'MonitorController@hasilmonitor')->name('hasilmonitor');
 	Route::post('/hasilgizi', 'MonitorController@perhitungan')->name('hasil');
 });
 Route::group(['namespace' => 'Posyandu'], function () {

@@ -19,6 +19,7 @@ class CreateMonitorsTable extends Migration
             $table->string('umur')->nullable();
             $table->string('beratbadan');
             $table->string('hasil');
+            $table->string('jk');
             $table->text('foto')->nullable();
             $table->text('urlfoto')->nullable();
             $table->string('gb')->comment('gizi buruk')->default(0);

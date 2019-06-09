@@ -10,6 +10,7 @@
     {{csrf_field()}} @foreach($balitas as $balita)
     <div class="container">
         <input type="hidden" name="balita_id" value="{{$balita->id}}">
+        <input type="hidden" name="jk" value="{{$balita->JK}}">
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>

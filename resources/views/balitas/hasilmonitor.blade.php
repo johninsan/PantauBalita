@@ -19,7 +19,7 @@
                 </li>
                 <li class="collection-item">Berat Badan: {{$monitor->beratbadan}}Kg</li>
                 <li class="collection-item">Umur : {{$monitor->umur}} Bulan</li>
-                <li class="collection-item">Jenis Kelamin : Laki-laki</li>
+                <li class="collection-item">Jenis Kelamin : {{$monitor->jk? 'Perempuan' : 'Laki-laki'}}</li>
             </ul>
         </div>
     </div>
@@ -41,7 +41,7 @@
             <span>ingin berkonsultasi dengan ahli? <a href="{{route('showpetugas')}}">tanya disini</a></span>
         </div>
         <div class="col m3 s12 push-m1">
-            <a class="blue lighten-effect blue lighten-2 btn z-depth-3"><i class="material-icons left">collections</i>List Hasil</a>
+            <a href="{{route('listbalita',$monitor ->balita_id)}}" class="blue lighten-effect blue lighten-2 btn z-depth-3"><i class="material-icons left">collections</i>List Hasil</a>
         </div>
     </div>
 </div>

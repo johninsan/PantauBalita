@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Reyzeal\Fuzzy;
 use App\Model\Balita\balita;
 use App\Model\monitor;
+use Carbon\Carbon;
 
 class MonitorController extends Controller
 {
@@ -20,12 +21,26 @@ class MonitorController extends Controller
         $monitors = monitor::where('kode', $kode)->get();
         return view('balitas.hasilmonitor', compact('monitors'));
     }
+    public function listhasil($id)
+    {
+        $list = balita::select(['balitas.nama', 'monitors.*'])
+            ->join('monitors', 'monitors.balita_id', '=', 'balitas.id')
+            ->where('balitas.id', '=', $id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return view('balitas.listhasil', compact('list'));
+    }
 
     public function perhitungan(Request $request)
     {
         $berat = $request->Berat;
-        $umur = $request->umur;
+        $months = $request->umur;
         $jk = $request->jk;
+        $lahir = $request->dob;
+        // $current_date_time = Carbon::now()->toDateTimeString();
+        // $diff = abs(strtotime($current_date_time) - strtotime($lahir));
+        // $years = floor($diff / (365 * 60 * 60 * 24));
+        // $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
         $fuzzy = new Fuzzy("Gizi", "Tsukamoto");
         $fuzzy->input()->addCategory('umur')
             ->addMembership('fase1', 'trapmf', [0, 0, 3, 6])
@@ -39,9 +54,11 @@ class MonitorController extends Controller
             ->addMembership('fase9', 'trapmf', [45, 48, 51, 54])
             ->addMembership('fase10', 'trapmf', [51, 54, 60, 60]);
         $fuzzy->input()->addCategory('BeratBadan')
-            ->addMembership('kb', 'trapmf', [0, 0, 5, 7])
-            ->addMembership('n', 'trapmf', [5, 7, 11, 13])
-            ->addMembership('bl', 'trapmf', [11, 13, 16, 18])
+            ->addMembership('sk', 'trapmf', [0, 0, 3, 4])
+            ->addMembership('kb', 'trapmf', [3, 4, 6, 7])
+            ->addMembership('cb', 'trapmf', [6, 7, 9, 10])
+            ->addMembership('n', 'trapmf', [9, 10, 12, 13])
+            ->addMembership('bl', 'trapmf', [12, 13, 16, 18])
             ->addMembership('bo', 'trapmf', [16, 18, 28, 28]);
         $fuzzy->output()->addCategory('gizi')
             ->addMembership('gb', 'trapmf', [0, 0, 0.25, 0.30])
@@ -49,33 +66,63 @@ class MonitorController extends Controller
             ->addMembership('s', 'trapmf', [0.40, 0.45, 0.55, 0.60])
             ->addMembership('gl', 'trapmf', [0.55, 0.60, 0.70, 0.75])
             ->addMembership('o', 'trapmf', [0.70, 0.75, 1, 1]);
+            //fase1
         $fuzzy->rules()
-            ->add('umur_fase1 AND BeratBadan_kb')
-            ->then('gizi_gk');
+            ->add('umur_fase1 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        if ($jk == 1) {
+            $fuzzy->rules()
+                ->add('umur_fase1 AND BeratBadan_kb')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('umur_fase1 AND BeratBadan_cb')
+                ->then('gizi_s');
+        } else {
+            $fuzzy->rules()
+                ->add('umur_fase1 AND BeratBadan_kb')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('umur_fase1 AND BeratBadan_cb')
+                ->then('gizi_gl');
+        }
         $fuzzy->rules()
             ->add('umur_fase1 AND BeratBadan_n')
-            ->then('gizi_s');
+            ->then('gizi_o');
         $fuzzy->rules()
             ->add('umur_fase1 AND BeratBadan_bl')
             ->then('gizi_o');
         $fuzzy->rules()
             ->add('umur_fase1 AND BeratBadan_bo')
             ->then('gizi_o');
+            //fase 2
+        $fuzzy->rules()
+            ->add('umur_fase2 AND BeratBadan_sk')
+            ->then('gizi_gb');
         $fuzzy->rules()
             ->add('umur_fase2 AND BeratBadan_kb')
             ->then('gizi_gb');
         $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_n')
+            ->add('umur_fase2 AND BeratBadan_cb')
             ->then('gizi_s');
+        $fuzzy->rules()
+            ->add('umur_fase2 AND BeratBadan_n')
+            ->then('gizi_gl');
         $fuzzy->rules()
             ->add('umur_fase2 AND BeratBadan_bl')
             ->then('gizi_o');
         $fuzzy->rules()
             ->add('umur_fase2 AND BeratBadan_bo')
             ->then('gizi_o');
+            //fase 3
+        $fuzzy->rules()
+            ->add('umur_fase3 AND BeratBadan_sk')
+            ->then('gizi_gb');
         $fuzzy->rules()
             ->add('umur_fase3 AND BeratBadan_kb')
             ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase3 AND BeratBadan_cb')
+            ->then('gizi_gk');
         $fuzzy->rules()
             ->add('umur_fase3 AND BeratBadan_n')
             ->then('gizi_s');
@@ -87,8 +134,14 @@ class MonitorController extends Controller
             ->then('gizi_o');
             //fase 4
         $fuzzy->rules()
+            ->add('umur_fase4 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase4 AND BeratBadan_kb')
             ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase4 AND BeratBadan_cb')
+            ->then('gizi_gk');
         $fuzzy->rules()
             ->add('umur_fase4 AND BeratBadan_n')
             ->then('gizi_s');
@@ -100,20 +153,41 @@ class MonitorController extends Controller
             ->then('gizi_o');
             //fase5
         $fuzzy->rules()
+            ->add('umur_fase5 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase5 AND BeratBadan_kb')
             ->then('gizi_gb');
         $fuzzy->rules()
-            ->add('umur_fase5 AND BeratBadan_n')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase5 AND BeratBadan_bl')
-            ->then('gizi_s');
+            ->add('umur_fase5 AND BeratBadan_cb')
+            ->then('gizi_gb');
+        if ($jk == 1) {
+            $fuzzy->rules()
+                ->add('umur_fase5 AND BeratBadan_n')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('umur_fase5 AND BeratBadan_bl')
+                ->then('gizi_s');
+        } else {
+            $fuzzy->rules()
+                ->add('umur_fase5 AND BeratBadan_n')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('umur_fase5 AND BeratBadan_bl')
+                ->then('gizi_gl');
+        }
         $fuzzy->rules()
             ->add('umur_fase5 AND BeratBadan_bo')
             ->then('gizi_o');
             //fase6
         $fuzzy->rules()
+            ->add('umur_fase6 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase6 AND BeratBadan_kb')
+            ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase6 AND BeratBadan_cb')
             ->then('gizi_gb');
         $fuzzy->rules()
             ->add('umur_fase6 AND BeratBadan_n')
@@ -123,10 +197,16 @@ class MonitorController extends Controller
             ->then('gizi_s');
         $fuzzy->rules()
             ->add('umur_fase6 AND BeratBadan_bo')
-            ->then('gizi_gl');
+            ->then('gizi_o');
             //fase7
         $fuzzy->rules()
+            ->add('umur_fase7 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase7 AND BeratBadan_kb')
+            ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase7 AND BeratBadan_cb')
             ->then('gizi_gb');
         $fuzzy->rules()
             ->add('umur_fase7 AND BeratBadan_n')
@@ -139,11 +219,17 @@ class MonitorController extends Controller
             ->then('gizi_gl');
             //fase8
         $fuzzy->rules()
+            ->add('umur_fase8 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase8 AND BeratBadan_kb')
             ->then('gizi_gb');
         $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_n')
+            ->add('umur_fase8 AND BeratBadan_cb')
             ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase8 AND BeratBadan_n')
+            ->then('gizi_gk');
         $fuzzy->rules()
             ->add('umur_fase8 AND BeratBadan_bl')
             ->then('gizi_s');
@@ -152,7 +238,13 @@ class MonitorController extends Controller
             ->then('gizi_gl');
             //fase9
         $fuzzy->rules()
+            ->add('umur_fase9 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase9 AND BeratBadan_kb')
+            ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase9 AND BeratBadan_cb')
             ->then('gizi_gb');
         $fuzzy->rules()
             ->add('umur_fase9 AND BeratBadan_n')
@@ -165,7 +257,13 @@ class MonitorController extends Controller
             ->then('gizi_s');
             //fase10
         $fuzzy->rules()
+            ->add('umur_fase10 AND BeratBadan_sk')
+            ->then('gizi_gb');
+        $fuzzy->rules()
             ->add('umur_fase10 AND BeratBadan_kb')
+            ->then('gizi_gb');
+        $fuzzy->rules()
+            ->add('umur_fase10 AND BeratBadan_cb')
             ->then('gizi_gb');
         $fuzzy->rules()
             ->add('umur_fase10 AND BeratBadan_n')
@@ -177,15 +275,16 @@ class MonitorController extends Controller
             ->add('umur_fase10 AND BeratBadan_bo')
             ->then('gizi_s');
         $total = $fuzzy->calc([
-            'umur' => $umur,
+            'umur' => $months,
             'BeratBadan' => $berat
         ]);
         $monitor = new monitor();
         $kode = str_random(30);
         $monitor->balita_id = $request->balita_id;
         $monitor->kode = $kode;
+        $monitor->jk = $jk;
         $monitor->beratbadan = $berat;
-        $monitor->umur = $umur;
+        $monitor->umur = $months;
         $monitor->hasil = $total;
         if ($total <= "0.25") {
             $monitor->gb = 1;

@@ -27,6 +27,7 @@ Route::group(['namespace' => 'Balita'], function () {
 	Route::get('/monitorBalita/{id}', 'MonitorController@index')->name('monitor');
 	Route::get('/HasilMonitorBalita/{kode}', 'MonitorController@hasilmonitor')->name('hasilmonitor');
 	Route::post('/hasilgizi', 'MonitorController@perhitungan')->name('hasil');
+	Route::get('/listhasil/{id}', 'MonitorController@listhasil')->name('listbalita');
 });
 Route::group(['namespace' => 'Posyandu'], function () {
 	Route::resource('PantauBalita/Posyandu', 'PosyanduController');

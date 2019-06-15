@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class OrangTuaController extends Controller
 {
-    public function showpetugas(User $user)
+    public function showpetugas()
     {
         $petugass = User::select(['users.*'])
             ->join('role_user', 'role_user.user_id', '=', 'users.id')

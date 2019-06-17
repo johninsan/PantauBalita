@@ -28,6 +28,12 @@
 </section>
 <div class="container">
     <div class="row">
+        <small>Catatan: </small>
+    </div>
+    <div class="row">
+        <small class="red-text text-darken-2">hijau = ada kegiatan, merah = tidak ada kegiatan</small>
+    </div>
+    <div class="row">
         <div class="col m6 s12">
             <p>Kesehatan ibu dan Anak:</p>
             <div class="progress">

@@ -19,11 +19,14 @@
                 </div>
                 <div class="card-content">
                     <h5 class="ligt card-title">{{$balita->nama}}</h5>
-                    <p>{{$balita ->JK? 'Perempuan' : 'Laki-laki'}}</p>
+                    @if($balita->JK == 1)
+                    <p>Laki-laki</p>
+                    @else
+                    <p>Perempuan</p>
+                    @endif
                 </div>
                 <div class="card-action">
                     <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('monitor',$balita->id)}}"><i class="material-icons">computer</i></a>
-                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat list gizi balita" href="{{route('listbalita',$balita->id)}}"><i class="material-icons">collections</i></a>
                     <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk mengubah data" href="{{route('DaftarBalita.edit',$balita ->id)}}"><i class="material-icons">edit</i></a>
                     <form method="post" id="delete-form-{{$balita->id}}" action="{{route('DaftarBalita.destroy',$balita ->id)}}" style="display: none">
                         {{csrf_field()}} {{method_field('DELETE')}}
@@ -36,6 +39,7 @@
                             else{
                             event.preventDefault();
                             }"><i class="material-icons">delete</i></a>
+                    <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat list gizi balita" href="{{route('listbalita',$balita->id)}}"><i class="material-icons">list</i></a>
                 </div>
             </div>
         </div>

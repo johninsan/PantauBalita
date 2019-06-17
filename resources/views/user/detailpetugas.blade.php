@@ -20,7 +20,6 @@
                     <h4>Data Petugas</h4>
                 </li>
                 <li class="collection-item">Nama : {{$petugas->name}}</li>
-                <li class="collection-item">Telp : {{$petugas->phone}}</li>
                 <li class="collection-item">Alamat : {{$petugas->alamat}}</li>
             </ul>
         </div>

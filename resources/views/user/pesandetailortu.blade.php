@@ -71,7 +71,7 @@
                 <div class="input-field col m8 s6">
                     <p>Judul :</p>
                     <input id="modal_judul" name="judul" type="text" class="validate" readonly>
-                    <input id="modal_idpenerima" name="idPenerima" type="text">
+                    <input id="modal_idpenerima" name="idPenerima" type="hidden">
                     <input id="modal_kode" name="kode" type="hidden">
                 </div>
             </div>

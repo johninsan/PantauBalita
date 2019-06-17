@@ -58,8 +58,8 @@ class MonitorController extends Controller
             ->addMembership('kb', 'trapmf', [3, 4, 6, 7])
             ->addMembership('cb', 'trapmf', [6, 7, 9, 10])
             ->addMembership('n', 'trapmf', [9, 10, 12, 13])
-            ->addMembership('bl', 'trapmf', [12, 13, 16, 18])
-            ->addMembership('bo', 'trapmf', [16, 18, 28, 28]);
+            ->addMembership('bl', 'trapmf', [12, 13, 16, 17])
+            ->addMembership('bo', 'trapmf', [16, 17, 28, 28]);
         $fuzzy->output()->addCategory('gizi')
             ->addMembership('gb', 'trapmf', [0, 0, 0.25, 0.30])
             ->addMembership('gk', 'trapmf', [0.25, 0.30, 0.40, 0.45])
@@ -278,6 +278,7 @@ class MonitorController extends Controller
             'umur' => $months,
             'BeratBadan' => $berat
         ]);
+        // return $total;
         $monitor = new monitor();
         $kode = str_random(30);
         $monitor->balita_id = $request->balita_id;

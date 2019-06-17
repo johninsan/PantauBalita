@@ -3,20 +3,22 @@
 @endsection
  
 @section('main-content')
-<section class="blue lighten-3">
+<section class="grey lighten-1">
     <h3 class="center light grey-text text-darken-3">Jadwal Posyandu</h3>
 </section>
 <div class="container">
     <div class="row">
         @foreach($posyandus as $posyandu)
         <div class="col s12 m4">
-            <div class="card brown darken-1">
+            <div class="card small purple lighten-2">
                 <div class="card-content white-text">
-                    <span class="card-title">RW : {{$posyandu->rw_id}}</span>
+                    <span class="card-title">JADWAL</span>
+                    <br>
+                    <h5>RW : {{$posyandu->rw_id}}</h5>
                     <h5 class="light">{{str_limit($posyandu->deskripsi,10)}}</h5>
-                    <p>{{\Carbon\Carbon::parse($posyandu->tanggal)->format('d F Y')}}</p>
+                    <p>Dilaksanakan : {{\Carbon\Carbon::parse($posyandu->tanggal)->format('d F Y')}}</p>
                 </div>
-                <div class="card-action">
+                <div class="card-action purple">
                     <a href="{{route('isiposyandu',base64_encode($posyandu->id))}}">Lihat detail</a>
                 </div>
             </div>

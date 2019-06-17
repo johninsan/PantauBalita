@@ -19,7 +19,8 @@
                 </li>
                 <li class="collection-item">Berat Badan: {{$monitor->beratbadan}}Kg</li>
                 <li class="collection-item">Umur : {{$monitor->umur}} Bulan</li>
-                <li class="collection-item">Jenis Kelamin : {{$monitor->jk? 'Perempuan' : 'Laki-laki'}}</li>
+                <li class="collection-item">Jenis Kelamin : @if($monitor->jk == 1) Laki-laki @else Perempuan @endif
+                </li>
             </ul>
         </div>
     </div>

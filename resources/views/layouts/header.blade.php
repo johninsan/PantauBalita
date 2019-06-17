@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('materialize/css/my.css') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta charset="UTF-8">
-<title>test</title>
+<title>PantauBalita</title>
 <div class="navbar-fixed">
   <!-- Dropdown Structure -->
   <ul class="dropdown-content" id="dropdownarticle">

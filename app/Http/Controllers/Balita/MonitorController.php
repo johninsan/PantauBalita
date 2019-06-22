@@ -28,16 +28,66 @@ class MonitorController extends Controller
             ->where('balitas.id', '=', $id)
             ->orderBy('created_at', 'desc')
             ->get();
-        return view('balitas.listhasil', compact('list'));
+        $bulan = $this->getMonthlyPerjalananData();
+        return view('balitas.listhasil', compact('list', 'bulan'));
+    }
+
+    public function getAllMonths()
+    {
+        $month_array = array();
+        $monitors_dates = monitor::orderBy('created_at', 'ASC')->pluck('created_at');
+        $monitors_dates = json_decode($monitors_dates);
+        if (!empty($monitors_dates)) {
+            foreach ($monitors_dates as $unk_date) {
+                $date = new \DateTime($unk_date->date);
+                $month_no = $date->format('m');
+                $month_name = $date->format('M');
+                $month_array[$month_no] = $month_name;
+            }
+        }
+        return $month_array;
+        // return $this->getMonthlyMonitor(06);
+    }
+    public function getMonthlyMonitor($month)
+    {
+        $gb = monitor::select('gk')
+            ->where('gk', 1)
+            ->whereMonth('created_at', $month)
+            ->first();
+        return $gb;
+    }
+
+    public function getMonthlyPerjalananData()
+    {
+        $month_array = $this->getAllMonths();
+        $month_name_array = array();
+        if (!empty($month_array)) {
+            foreach ($month_array as $month_no => $month_name) {
+                array_push($month_name_array, $month_name);
+            }
+        }
+        return $month_name_array;
     }
 
     public function perhitungan(Request $request)
     {
         $berat = $request->Berat;
-        $months = $request->umur;
+        // $months = $request->umur;
         $jk = $request->jk;
         $lahir = $request->dob;
-        // $current_date_time = Carbon::now()->toDateTimeString();
+        $date2 = Carbon::now()->toDateTimeString();
+        $date1 = $lahir;
+
+        $ts1 = strtotime($date1);
+        $ts2 = strtotime($date2);
+
+        $year1 = date('Y', $ts1);
+        $year2 = date('Y', $ts2);
+
+        $month1 = date('m', $ts1);
+        $month2 = date('m', $ts2);
+
+        $months = (($year2 - $year1) * 12) + ($month2 - $month1);
         // $diff = abs(strtotime($current_date_time) - strtotime($lahir));
         // $years = floor($diff / (365 * 60 * 60 * 24));
         // $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));

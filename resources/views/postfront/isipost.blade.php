@@ -5,7 +5,7 @@
 @section('main-content')
 <section>
     <div class="center col m12 s12 isi-img">
-        <img src="{{ Storage::disk('local')->url($post->image) }}" />
+        <img src="{{ url( 'uploads/foto/article') }}/{{ $post->image }}" />
     </div>
 </section>
 <section class="grey lighten-3">

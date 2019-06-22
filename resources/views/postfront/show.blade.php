@@ -11,10 +11,10 @@
             <div class="col s12 m4">
                 <div class="card medium">
                     <div class="card-image">
-                        <img src="{{ Storage::disk('local')->url($post->image) }}">
+                        <img src="{{ url( 'uploads/foto/article') }}/{{ $post->image }}">
                     </div>
                     <div class="card-content">
-                        <h5 class="ligt card-title">Judul :{{$post->title}}</h5>
+                        <p class="ligt card-title">Judul :{{$post->title}}</p>
                         <p>Category: @foreach($post->categories as $category)
                             <a href="{{route('category',$category->slug)}}">{{$category->name}}</a> @endforeach</p>
                     </div>

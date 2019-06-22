@@ -48,11 +48,19 @@ class PostController extends Controller
             'body' => 'required',
             'image' => 'required',
         ]);
-        if ($request->hasFile('image')) {
-            $imageName = $request->image->store('public');
-        }
         $post = new post;
-        $post->image = $imageName;
+        $file = $request->file('image');
+        if (empty($file)) {
+            $post->urlfoto = null;
+            $post->image = null;
+        } else {
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000, 1001238912) . "." . $ext;
+            $file->move('uploads/foto/article/', $newName);
+            $post->image = $newName;
+            $urlfoto = url('uploads/foto/article/') . $newName;
+            $post->urlfoto = $urlfoto;
+        }
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->slug = $request->slug;
@@ -106,11 +114,18 @@ class PostController extends Controller
             'body' => 'required',
             'image' => 'required',
         ]);
-        if ($request->hasFile('image')) {
-            $imageName = $request->image->store('public');
-        }
         $post = post::find($id);
-        $post->image = $imageName;
+        if (empty($file)) {
+            $balita->urlfoto = null;
+            $balita->image = null;
+        } else {
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000, 1001238912) . "." . $ext;
+            $file->move('uploads/foto/article/', $newName);
+            $balita->image = $newName;
+            $urlfoto = url('uploads/foto/article/') . $newName;
+            $balita->urlfoto = $urlfoto;
+        }
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->slug = $request->slug;

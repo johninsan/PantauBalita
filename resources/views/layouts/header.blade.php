@@ -17,6 +17,16 @@
     <li><a href="{{route('category.index')}}">category</a></li>
     @endcan
   </ul>
+  {{-- article mobile --}}
+  <ul class="dropdown-content" id="dropdownarticlemob">
+    @can('roles.article',Auth::user())
+    <li><a href="{{route('post.index')}}">Articlepost</a></li>
+    @endcan @can('roles.tag',Auth::user())
+    <li><a href="{{route('tag.index')}}">tag</a></li>
+    @endcan @can('roles.category',Auth::user())
+    <li><a href="{{route('category.index')}}">category</a></li>
+    @endcan
+  </ul>
   <ul class="dropdown-content" id="dropdownprofile">
     @can('roles.inboxpetugas',Auth::user())
     <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanpetugas')}}"><i class="material-icons small ">mail</i>Pesan</a></li>
@@ -35,11 +45,24 @@
       </form>
     </li>
   </ul>
-  <ul id="dropdownmobile" class="dropdown-content">
-    <li><a href="{{route('DaftarBalita.index')}}">Daftar Balita</a></li>
-    <li><a href="#!">two</a></li>
+  {{-- profilemobile --}}
+  <ul class="dropdown-content" id="dropdownprofilemob">
+    @can('roles.inboxpetugas',Auth::user())
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanpetugas')}}"><i class="material-icons small ">mail</i>Pesan</a></li>
     <li class="divider"></li>
-    <li><a href="#!">three</a></li>
+    @endcan @can('roles.inboxortu',Auth::user())
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat pesan masuk" href="{{route('pesanortu')}}"><i class="material-icons small ">mail</i>Pesan</a></li>
+    <li class="divider"></li>
+    @endcan
+    <li>
+      <a href="{{ route('logout') }}" onclick="event.preventDefault();
+            document.getElementById('logout-form').submit();">
+             Logout
+         </a>
+      <form id="logout-form" action="{{route('logout')}}" method="POST" style="display: none;">
+        {{ csrf_field() }}
+      </form>
+    </li>
   </ul>
 
   <nav class="teal darken-1">
@@ -78,10 +101,28 @@
   </nav>
 </div>
 <ul class="sidenav" id="mobile-nav">
-  <li><a href="{{ route('home') }}">Home</a></li>
-  <li><a class="dropdown-trigger" href="#!" data-target="dropdownmobile">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>
-  <li><a href="#modal1" class="modal-trigger">Login</a></li>
+  <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk melihat jadwal posyandu" href="{{route('showposyandu')}}">JADWAL</a></li>
+
+  <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membaca artikel" href="{{route('showpost')}}">ARTIKEL</a></li>
+
+  @if(Auth::user()) @can('roles.article',Auth::user())
+  <li><a class="dropdown-trigger" href="#!" data-target="dropdownarticlemob">Buat Article<i class="material-icons right">arrow_drop_down</i></a>
+  </li>
+  @endcan @can('roles.balita',Auth::user())
+  <li><a <a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi balita" href="{{route('DaftarBalita.index')}}">BALITA</a>
+  </li>
+  @endcan {{-- Buat jadwal --}} @can('roles.posyandu',Auth::user())
+  <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membuat jadwal posyandu" href="{{route('Posyandu.index')}}">Buat Jadwal</a>
+  </li>
+  @endcan @can('roles.inboxortu',Auth::user())
+  <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a>
+  </li>
+  @endcan
+  <li><a class="dropdown-trigger" data-target="dropdownprofilemob" href="#"><i class="material-icons">more_vert</i></a></li>
+  @else
+  <li><a href="#modal1" class="modal-trigger">LOGIN</a></li>
   <li><a href="{{ route('register') }}" class="waves-effect waves-light btn">Daftar</a></li>
+  @endif
 </ul>
 
 <form action="{{route('login')}}" method="post">
@@ -91,7 +132,7 @@
       <h4>Login</h4>
       <p>Masukkan Username dan Password</p>
       <div class="row">
-        <div class="input-field col m8 s6">
+        <div class="input-field col m8 s12">
           <i class="material-icons prefix">account_circle</i>
           <input id="uname" name="username" type="text" class="validate">
           <label for="uname">Username</label>
@@ -99,7 +140,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col m8 s6">
+        <div class="input-field col m8 s10">
           <i class="material-icons prefix">lock</i>
           <input placeholder="Minimal 6 digit" name="password" id="myPass" type="password" class="validate">
           <label for="first_name">Password</label>

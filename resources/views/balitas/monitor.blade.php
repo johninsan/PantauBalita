@@ -20,6 +20,7 @@
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
         </div>
+        {{--
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>
@@ -27,7 +28,7 @@
                 <label for="umur">umur:</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="file-field input-field col m6 s12 push-m2">
                 <div class="btn">

@@ -50,23 +50,32 @@ class MonitorController extends Controller
     }
     public function getMonthlyMonitor($month)
     {
-        $gb = monitor::select('gk')
-            ->where('gk', 1)
-            ->whereMonth('created_at', $month)
-            ->first();
-        return $gb;
+        $statusreal = monitor::select('status')->whereMonth('created_at', $month)
+            ->get();
+        $row = count($statusreal);
+        for ($i = 0; $i < $row; $i++) {
+            $statusreal = $statusreal[$i]->status;
+        }
+        return $statusreal;
     }
 
     public function getMonthlyPerjalananData()
     {
+        $monthly_status_array = array();
         $month_array = $this->getAllMonths();
         $month_name_array = array();
         if (!empty($month_array)) {
             foreach ($month_array as $month_no => $month_name) {
+                $statusreal = $this->getMonthlyMonitor($month_no);
+                array_push($monthly_status_array, $statusreal);
                 array_push($month_name_array, $month_name);
             }
         }
-        return $month_name_array;
+        $monthly_status_data_array = array(
+            'months' => $month_name_array,
+            'status_data' => $monthly_status_array,
+        );
+        return $monthly_status_data_array;
     }
 
     public function perhitungan(Request $request)
@@ -338,15 +347,15 @@ class MonitorController extends Controller
         $monitor->umur = $months;
         $monitor->hasil = $total;
         if ($total <= "0.25") {
-            $monitor->gb = 1;
+            $monitor->status = 1;
         } elseif ($total >= "0.25" && $total <= "0.4") {
-            $monitor->gk = 1;
+            $monitor->status = 2;
         } elseif ($total >= "0.4" && $total <= "0.55") {
-            $monitor->s = 1;
+            $monitor->status = 3;
         } elseif ($total >= "0.55" && $total <= "0.7") {
-            $monitor->gl = 1;
+            $monitor->status = 4;
         } elseif ($total >= "0.7") {
-            $monitor->o = 1;
+            $monitor->status = 5;
         }
         $monitor->save();
         return redirect(route('hasilmonitor', ['kode' => $kode]));

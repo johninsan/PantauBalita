@@ -27,11 +27,11 @@
 </div>
 <div class="row">
     <section class="grey lighten-3">
-        <h4 class="light center grey-text text-darken-3">Kondisi gizi balita saat ini adalah: @if($monitor->gb == 1)
-            <span class="red-text text-darken-2">Gizi Buruk</span> @elseif($monitor->gk ==1)
-            <span class="lime-text text-lighten-1">Kurang Gizi</span> @elseif($monitor->s ==1)
-            <span class="green-text text-accent-3">Sehat</span> @elseif($monitor->gl ==1)
-            <span class="lime-text text-lighten-1">Gizi Lebih</span> @elseif($monitor->o ==1)
+        <h4 class="light center grey-text text-darken-3">Kondisi gizi balita saat ini adalah: @if($monitor->status == 1)
+            <span class="red-text text-darken-2">Gizi Buruk</span> @elseif($monitor->status ==2)
+            <span class="lime-text text-lighten-1">Kurang Gizi</span> @elseif($monitor->status ==3)
+            <span class="green-text text-accent-3">Sehat</span> @elseif($monitor->status ==4)
+            <span class="lime-text text-lighten-1">Gizi Lebih</span> @elseif($monitor->status ==5)
             <span class="red-text text-darken-2">Obesitas</span> @endif
         </h4>
     </section>

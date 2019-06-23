@@ -17,6 +17,7 @@
 </section>
 <section class="grey lighten-3">
     <div class="container">
+    @include('includes.messages')
         <div class="row">
             <div class="col m2 s12">
                 <h5 class="light">Detail Pesan</h5>
@@ -63,12 +64,12 @@
             <h4>Pesan</h4>
             <p>Kepada :</p>
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col m8 s12">
                     <input disabled id="modal_nama" type="text" class="validate">
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col m8 s6">
+                <div class="input-field col m8 s12">
                     <p>Judul :</p>
                     <input id="modal_judul" name="judul" type="text" class="validate" readonly>
                     <input id="modal_idpenerima" name="idPenerima" type="hidden">
@@ -76,7 +77,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="input-field col m8 s6">
+                <div class="input-field col m8 s12">
                     <i class="material-icons prefix">mode_edit</i>
                     <textarea id="icon_prefix2" name="message" class="materialize-textarea"></textarea>
                     <label for="icon_prefix2">Isi pesan</label>

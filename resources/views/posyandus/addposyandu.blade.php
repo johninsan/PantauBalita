@@ -7,6 +7,7 @@
     <h3 class="light grey-text text-darken-3 center">Tambah Jadwal Posyandu</h3>
 </section>
 <div class="container">
+    @include('includes.messages')
     <form action="{{route('Posyandu.store')}}" method="post">
         {{csrf_field()}}
         <div class="row">
@@ -78,7 +79,7 @@
         <div class="container">
             <div class="row">
                 <div class="col m10 s12">
-                    <a class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
+                    <a href="{{route('Posyandu.index')}}" class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
                     <button class="btn waves-effect waves-light col m6 s6 push-s1 push-m2 z-depth-3" type="submit">Submit
                     <i class="material-icons right">done</i>
                     </button>

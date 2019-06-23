@@ -28,13 +28,14 @@ class MonitorController extends Controller
             ->where('balitas.id', '=', $id)
             ->orderBy('created_at', 'desc')
             ->get();
-        $bulan = $this->getMonthlyPerjalananData();
+        $bulan = $this->getMonthlyMonitorData();
         return view('balitas.listhasil', compact('list', 'bulan'));
     }
 
     public function getAllMonths()
     {
         $month_array = array();
+        // $monitors_dates = monitor::where('balita_id', 1)->orderBy('created_at', 'ASC')->pluck('created_at');
         $monitors_dates = monitor::orderBy('created_at', 'ASC')->pluck('created_at');
         $monitors_dates = json_decode($monitors_dates);
         if (!empty($monitors_dates)) {
@@ -50,7 +51,9 @@ class MonitorController extends Controller
     }
     public function getMonthlyMonitor($month)
     {
-        $statusreal = monitor::select('status')->whereMonth('created_at', $month)
+        $statusreal = monitor::select('status')
+            ->whereMonth('created_at', $month)
+            // ->where('balita_id', 1)
             ->get();
         $row = count($statusreal);
         for ($i = 0; $i < $row; $i++) {
@@ -59,7 +62,7 @@ class MonitorController extends Controller
         return $statusreal;
     }
 
-    public function getMonthlyPerjalananData()
+    public function getMonthlyMonitorData()
     {
         $monthly_status_array = array();
         $month_array = $this->getAllMonths();

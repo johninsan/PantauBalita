@@ -8,6 +8,7 @@
     <h3 class="grey-text light center">Tags</h3>
 </section>
 <div class="container">
+    @include('includes.messages')
     <div class="row">
         <a href="{{route('tag.create')}}" class="pink lighten-effect deep-orange lighten-1 btn col m2 s12 z-depth-3"><i class="material-icons right">add</i>Tambah</a>
     </div>

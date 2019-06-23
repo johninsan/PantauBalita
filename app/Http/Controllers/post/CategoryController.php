@@ -46,7 +46,7 @@ class CategoryController extends Controller
         $tag->slug = $request->slug;
         $tag->save();
 
-        return redirect(route('category.index'));
+        return redirect(route('category.index'))->with('message', 'Category berhasil ditambahkan');
     }
 
     /**
@@ -90,7 +90,7 @@ class CategoryController extends Controller
         $category->slug = $request->slug;
         $category->save();
 
-        return redirect(route('category.index'));
+        return redirect(route('category.index'))->with('message', 'Category berhasil diubah');
     }
 
     /**
@@ -102,6 +102,6 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         category::where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Category berhasil dihapus');
     }
 }

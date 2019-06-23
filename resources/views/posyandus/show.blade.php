@@ -9,6 +9,7 @@
 </section>
 <div class="container">
     <div class="row">
+    @include('includes.messages')
         <a href="{{route('Posyandu.create')}}" class="pink lighten-effect deep-orange lighten-1 btn col m2 s12 z-depth-3"><i class="material-icons right">add</i>Tambah</a>
     </div>
     <div class="row">

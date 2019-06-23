@@ -49,7 +49,7 @@ class PesanController extends Controller
             $data->penerima_id = $request->idPenerima;
             $data->pesan = $request->message;
             $data->save();
-            return back()->with('alert-success', '<script> window.onload = swal("Sukses!", "Pesan anda telah terkirim!", "success")</script>');
+            return back()->with('message', 'Pesan berhasil dikirim');
         }
     }
 
@@ -62,6 +62,6 @@ class PesanController extends Controller
         $data->penerima_id = $request->idPenerima;
         $data->pesan = $request->message;
         $data->save();
-        return back()->with('alert-success', '<script> window.onload = swal("Sukses!", "Pesan anda telah terkirim!", "success")</script>');
+        return back()->with('message', 'Pesan berhasil dikirim');
     }
 }

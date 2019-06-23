@@ -7,6 +7,7 @@
     <h3 class="grey-text light center">Balita</h3>
 </section>
 <div class="container">
+    @include('includes.messages')
     <div class="row">
         <a data-position="bottom" data-tooltip="Klik untuk mendaftarkan balita" href="{{route('DaftarBalita.create')}}" class="tooltipped pink lighten-effect deep-orange lighten-1 btn col m2 s12 z-depth-3"><i class="material-icons right">add</i>Daftar</a>
     </div>

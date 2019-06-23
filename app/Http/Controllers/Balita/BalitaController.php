@@ -64,7 +64,7 @@ class BalitaController extends Controller
         $balita->dob = $request->dob;
         $balita->JK = $request->get('jk', 0);
         $balita->save();
-        return redirect(route('DaftarBalita.index'));
+        return redirect(route('DaftarBalita.index'))->with('message', 'Balita berhasil didaftarkan');
     }
 
     /**
@@ -122,7 +122,7 @@ class BalitaController extends Controller
         $balita->dob = $request->dob;
         $balita->JK = $request->get('jk', 0);
         $balita->save();
-        return redirect(route('DaftarBalita.index'));
+        return redirect(route('DaftarBalita.index'))->with('message', 'Data berhasil diubah');
     }
 
     /**
@@ -134,6 +134,6 @@ class BalitaController extends Controller
     public function destroy($id)
     {
         balita::where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Data berhasil dihapus');
     }
 }

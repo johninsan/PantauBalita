@@ -9,6 +9,7 @@
 <form action="{{route('tag.update',$tags->id)}}" method="POST">
     {{csrf_field()}} {{method_field('PUT')}}
     <div class="container">
+    @include('includes.messages')
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>
@@ -29,7 +30,7 @@
     <div class="container">
         <div class="row">
             <div class="col m6 s12">
-                <a class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
+                <a href="{{route('tag.index')}}" class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
                 <button class="btn waves-effect waves-light col m6 s6 push-s1 push-m2 z-depth-3" type="submit">Submit
                 <i class="material-icons right">done</i>
                 </button>

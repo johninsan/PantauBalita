@@ -87,7 +87,7 @@ class PosyanduController extends Controller
         }
         $posyandu->save();
 
-        return redirect(route('Posyandu.index'));
+        return redirect(route('Posyandu.index'))->with('message', 'Jadwal berhasil ditambahkan');
     }
 
     /**
@@ -170,7 +170,7 @@ class PosyanduController extends Controller
         }
         $posyandu->save();
 
-        return redirect(route('Posyandu.index'));
+        return redirect(route('Posyandu.index'))->with('message', 'Jadwal berhasil diubah');
     }
 
     /**
@@ -182,6 +182,6 @@ class PosyanduController extends Controller
     public function destroy($id)
     {
         posyandu::where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'Jadwal berhasil dihapus');
     }
 }

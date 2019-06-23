@@ -70,7 +70,7 @@ class PostController extends Controller
         $post->tags()->sync($request->tags);
         $post->categories()->sync($request->categories);
 
-        return redirect(route('post.index'));
+        return redirect(route('post.index'))->with('message', 'artikel berhasil dibuat');
     }
 
     /**
@@ -135,7 +135,7 @@ class PostController extends Controller
         $post->categories()->sync($request->categories);
         $post->save();
 
-        return redirect(route('post.index'));
+        return redirect(route('post.index'))->with('message', 'artikel berhasil diubah');
     }
 
     /**
@@ -147,6 +147,6 @@ class PostController extends Controller
     public function destroy($id)
     {
         post::where('id', $id)->delete();
-        return redirect()->back();
+        return redirect()->back()->with('message', 'artikel berhasil dihapus');
     }
 }

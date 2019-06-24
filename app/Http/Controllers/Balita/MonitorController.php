@@ -11,6 +11,7 @@ use Carbon\Carbon;
 
 class MonitorController extends Controller
 {
+    protected $idb;
     public function index($id)
     {
         $balitas = balita::where('id', $id)->get();
@@ -23,6 +24,8 @@ class MonitorController extends Controller
     }
     public function listhasil($id)
     {
+        $this->idb = $id;
+        //$id = $this->idb;
         $list = balita::select(['balitas.nama', 'monitors.*'])
             ->join('monitors', 'monitors.balita_id', '=', 'balitas.id')
             ->where('balitas.id', '=', $id)
@@ -35,8 +38,8 @@ class MonitorController extends Controller
     public function getAllMonths()
     {
         $month_array = array();
-        // $monitors_dates = monitor::where('balita_id', 1)->orderBy('created_at', 'ASC')->pluck('created_at');
-        $monitors_dates = monitor::orderBy('created_at', 'ASC')->pluck('created_at');
+        $monitors_dates = monitor::where('balita_id', $this->idb)->orderBy('created_at', 'ASC')->pluck('created_at');
+        // $monitors_dates = monitor::orderBy('created_at', 'ASC')->pluck('created_at');
         $monitors_dates = json_decode($monitors_dates);
         if (!empty($monitors_dates)) {
             foreach ($monitors_dates as $unk_date) {
@@ -53,7 +56,7 @@ class MonitorController extends Controller
     {
         $statusreal = monitor::select('status')
             ->whereMonth('created_at', $month)
-            // ->where('balita_id', 1)
+            ->where('balita_id', $this->idb)
             ->get();
         $row = count($statusreal);
         for ($i = 0; $i < $row; $i++) {

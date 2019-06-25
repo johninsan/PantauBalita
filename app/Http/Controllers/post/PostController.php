@@ -112,19 +112,17 @@ class PostController extends Controller
             'subtitle' => 'required',
             'slug' => 'required',
             'body' => 'required',
-            'image' => 'required',
         ]);
         $post = post::find($id);
-        if (empty($file)) {
-            $balita->urlfoto = null;
-            $balita->image = null;
+        if (empty($request->file('image'))) {
+            $post->image = $post->image;
         } else {
+            unlink('uploads/foto/article/' . $post->image); //menghapus file lama
+            $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $newName = rand(100000, 1001238912) . "." . $ext;
             $file->move('uploads/foto/article/', $newName);
-            $balita->image = $newName;
-            $urlfoto = url('uploads/foto/article/') . $newName;
-            $balita->urlfoto = $urlfoto;
+            $post->image = $newName;
         }
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;

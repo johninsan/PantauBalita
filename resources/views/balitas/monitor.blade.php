@@ -15,7 +15,7 @@
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>
-                <input id="Berat" name="Berat" type="number" step=".01" class="validate">
+                <input id="Berat" name="Berat" type="number" step=".01" min="1" max="28" class="validate">
                 <label for="Berat">Berat Badan:</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>

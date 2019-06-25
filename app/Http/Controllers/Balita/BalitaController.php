@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\Balita\balita;
 use Illuminate\Support\Facades\Auth;
+use App\Model\monitor;
+use Carbon\Carbon;
 
 class BalitaController extends Controller
 {
@@ -18,6 +20,14 @@ class BalitaController extends Controller
     {
         $balitas = balita::where('user_id', Auth::user()->id)->get();
         return view('balitas.show', compact('balitas'));
+    }
+
+    public function isidata($id)
+    {
+        $month = Carbon::now()->format('m');
+        $balitas = balita::where('id', $id)->get();
+        $monitor_count = monitor::where('balita_id', $id)->whereMonth('created_at', $month)->get()->count();
+        return view('balitas.balita', compact('balitas', 'monitor_count'));
     }
 
     /**

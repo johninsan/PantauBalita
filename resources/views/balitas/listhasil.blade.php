@@ -62,7 +62,7 @@
 			data: {
 				labels: {!!json_encode($bulan['months'])!!},
 				datasets: [{
-					label: 'Nilai Gizi 1 = Gizi Buruk, 2 = Kurang Gizi, 3 = Sehat, 4 = Gizi Lebih, 5 = Obesitas',
+					label: '1 = Gizi Buruk, 2 = Kurang Gizi, 3 = Sehat, 4 = Gizi Lebih, 5 = Obesitas',
 					data: {!!json_encode($bulan['status_data'])!!},
 					backgroundColor: [
 					'rgba(0, 0, 0, 0)'

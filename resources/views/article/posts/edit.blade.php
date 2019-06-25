@@ -32,6 +32,10 @@
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
             <div class="file-field input-field col m4 s12">
+                <div>
+                    <label>Foto Lama:</label>
+                    <img src="{{ url('uploads/foto/article/'.$post->image) }}" style="width: 150px; height: 150px;">
+                </div>
                 <div class="btn">
                     <span>File</span>
                     <input type="file" name="image">

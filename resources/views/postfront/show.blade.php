@@ -25,7 +25,7 @@
             </div>
             @endforeach
         </div>
-        <div class="row">
+        <div class="row center">
             {{$posts->links()}}
         </div>
     </div>

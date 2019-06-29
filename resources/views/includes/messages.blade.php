@@ -1,5 +1,9 @@
 @if (count($errors) > 0) @foreach ($errors->all() as $error)
-<p class="red-text text-darken-2">{{ $error }}</p>
+<div class="card-panel">
+    <span class="red-text text-darken-2">{{ $error }}</span>
+</div>
 @endforeach @endif @if (session()->has('message'))
-<p class="green-text text-accent-3">{{ session('message') }}</p>
+<div class="card-panel">
+    <span class="green-text text-accent-3">{{ session('message') }}</span>
+</div>
 @endif

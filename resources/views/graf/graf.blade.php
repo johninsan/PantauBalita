@@ -9,6 +9,7 @@
 <form action="{{route('gizibulan')}}" method="POST">
     {{csrf_field()}}
     <div class="container">
+    @include('includes.messages')
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <select name="rw_id">
@@ -17,7 +18,7 @@
                   <option value="{{$rw->id}}">{{$rw->rw}}</option>
                   @endforeach
                 </select>
-                <label>Materialize Select</label>
+                <label>RW berapa?</label>
             </div>
         </div>
         <div class="row">

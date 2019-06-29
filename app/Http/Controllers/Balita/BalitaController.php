@@ -8,6 +8,7 @@ use App\Model\Balita\balita;
 use Illuminate\Support\Facades\Auth;
 use App\Model\monitor;
 use Carbon\Carbon;
+use App\Model\Posyandu\rw;
 
 class BalitaController extends Controller
 {
@@ -37,7 +38,8 @@ class BalitaController extends Controller
      */
     public function create()
     {
-        return view('balitas.addbalita');
+        $rws = rw::all();
+        return view('balitas.addbalita', compact('rws'));
     }
 
     /**
@@ -51,6 +53,7 @@ class BalitaController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'pob' => 'required',
+            'rw_id' => 'required',
             //'tanggal_mulai' => 'required|date_format:"d-m-Y"',
             //'tanggal_berakhir' => 'required|date_format:"d-m-Y"',
         ]);
@@ -59,6 +62,7 @@ class BalitaController extends Controller
         $balita->user_id = Auth::user()->id;
         $balita->nama = $request->nama;
         $balita->pob = $request->pob;
+        $balita->rw_id = $request->rw_id;
         $file = $request->file('foto');
         if (empty($file)) {
             $balita->urlfoto = null;
@@ -112,6 +116,7 @@ class BalitaController extends Controller
         $this->validate($request, [
             'nama' => 'required',
             'pob' => 'required',
+            'rw_id' => 'required',
             //'tanggal_mulai' => 'required|date_format:"d-m-Y"',
             //'tanggal_berakhir' => 'required|date_format:"d-m-Y"',
         ]);
@@ -119,6 +124,7 @@ class BalitaController extends Controller
         $balita = balita::find($id);
         $balita->nama = $request->nama;
         $balita->pob = $request->pob;
+        $balita->rw_id = $request->rw_id;
         if (empty($request->file('foto'))) {
             $balita->foto = $balita->foto;
         } else {

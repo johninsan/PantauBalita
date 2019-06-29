@@ -12,11 +12,20 @@
             <form action="{{route('DaftarBalita.store')}}" method="POST" enctype="multipart/form-data">
                 {{csrf_field()}}
                 <div class="row">
-                    <div class="input-field col m8 s12 offset-m2">
+                    <div class="input-field col m6 s12">
                         <i class="material-icons prefix">account_circle</i>
                         <input id="first" type="text" name="nama" class="validate">
                         <label for="first">Nama Balita :</label>
                         <span class="helper-text" data-error="wrong" data-success="right"></span>
+                    </div>
+                    <div class="input-field col m6 s12">
+                        <select name="rw_id">
+                              <option value="" disabled selected>Pilih RW</option>
+                              @foreach($rws as $rw)
+                              <option value="{{$rw->id}}">{{$rw->rw}}</option>
+                              @endforeach
+                            </select>
+                        <label>RW berapa?</label>
                     </div>
                 </div>
                 <div class="row">

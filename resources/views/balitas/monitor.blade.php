@@ -12,6 +12,7 @@
         <input type="hidden" name="balita_id" value="{{$balita->id}}">
         <input type="hidden" name="jk" value="{{$balita->JK}}">
         <input type="hidden" name="dob" value="{{$balita->dob}}">
+        <input type="hidden" name="rw_id" value="{{$balita->rw_id}}">
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>

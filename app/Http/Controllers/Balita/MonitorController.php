@@ -350,6 +350,7 @@ class MonitorController extends Controller
         $monitor->kode = $kode;
         $monitor->jk = $jk;
         $monitor->beratbadan = $berat;
+        $monitor->rw_id = $request->rw_id;
         $monitor->umur = $months;
         $monitor->hasil = $total;
         if ($total <= "0.25") {

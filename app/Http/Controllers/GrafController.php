@@ -32,6 +32,10 @@ class GrafController extends Controller
 
     public function gizibulan(Request $request)
     {
+        $this->validate($request, [
+            'rw_id' => 'required',
+            'bulan' => 'required',
+        ]);
         $rw1 = $request->rw_id;
         $bulan1 = $request->bulan;
         return redirect(route('showgraf', ['rw1' => $rw1, 'bulan1' => $bulan1]));

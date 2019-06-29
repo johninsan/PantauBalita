@@ -52,7 +52,7 @@
  
 @section('footerSection')
 <script src="{{ asset('materialize/datatable/datatables.min.js') }}"></script>
-<script src="{{ asset('materialize/js/chart.js') }}"></script>
+<script src="{{ asset('materialize/js/Chart.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready( function () {
 		$('#myTable').DataTable();

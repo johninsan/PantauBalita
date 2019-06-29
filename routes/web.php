@@ -47,6 +47,11 @@ Route::group(['namespace' => 'Admin'], function () {
 	Route::resource('admin/role', 'RoleController');
 	Route::resource('admin/permission', 'PermissionController');
 });
+//graf routes
+Route::get('graf/{rw1}/{bulan1}', 'GrafController@showgraf')->name('showgraf');
+Route::get('cekgizi', 'GrafController@pilihgraf')->name('cekgizi');
+Route::post('/datapost', 'GrafController@gizibulan')->name('gizibulan');
+// Route::get('bulan', 'GrafController@getBulanMonitorData');
 // Route::get('/', function () {
 //     return view('homepage.home');
 // });

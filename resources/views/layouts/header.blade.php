@@ -86,6 +86,8 @@
           @endcan {{-- Buat jadwal --}} @can('roles.posyandu',Auth::user())
           <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membuat jadwal posyandu" href="{{route('Posyandu.index')}}">Buat Jadwal</a>
           </li>
+          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk pantau gizi pada rw" href="{{route('cekgizi')}}">Pantau Gizi</a>
+          </li>
           @endcan @can('roles.inboxortu',Auth::user())
           <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a>
           </li>

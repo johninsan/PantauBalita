@@ -17,6 +17,12 @@
     <li><a href="{{route('category.index')}}">category</a></li>
     @endcan
   </ul>
+  <ul class="dropdown-content" id="dropdownpetugas">
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk pantau gizi pada rw" href="{{route('cekgizi')}}">Pantau Gizi</a>
+    </li>
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi pada balita" href="{{route('listortu')}}">Monitor Gizi</a>
+    </li>
+  </ul>
   {{-- article mobile --}}
   <ul class="dropdown-content" id="dropdownarticlemob">
     @can('roles.article',Auth::user())
@@ -86,7 +92,7 @@
           @endcan {{-- Buat jadwal --}} @can('roles.posyandu',Auth::user())
           <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk membuat jadwal posyandu" href="{{route('Posyandu.index')}}">Buat Jadwal</a>
           </li>
-          <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk pantau gizi pada rw" href="{{route('cekgizi')}}">Pantau Gizi</a>
+          <li><a class="dropdown-trigger" href="#!" data-target="dropdownpetugas">Pantau Gizi<i class="material-icons right">arrow_drop_down</i></a>
           </li>
           @endcan @can('roles.inboxortu',Auth::user())
           <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk bertanya pada petugas" href="{{route('showpetugas')}}">Tanya petugas</a>

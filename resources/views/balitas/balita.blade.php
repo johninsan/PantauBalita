@@ -10,7 +10,7 @@
 </section>
 <section class="grey lighten-3">
     <div class="row">
-        <h4 class="grey-text text-darken-3 center">Monitor gizi balita anda setiap bulan</h4>
+        <h4 class="grey-text text-darken-3 center">Monitor gizi balita setiap bulan</h4>
     </div>
 </section>
 <div class="container">
@@ -33,7 +33,7 @@
             <div class="row">
                 @if($monitor_count != 0)
                 <div class="card-panel  teal accent-3">
-                    <span class="grey-text text-darken-4">Bulan ini anda sudah memonitor gizi balita anda.
+                    <span class="grey-text text-darken-4">Bulan ini anda sudah memonitor gizi balita terkait.
                     </span>
                 </div>
                 @else
@@ -43,7 +43,7 @@
                 </div>
                 @endif
                 <div class="card-panel  pink lighten-4">
-                    <span class="grey-text text-darken-4">Lihat hasil monitor gizi balita anda. <br><a href="{{route('listbalita',$balita->id)}}">Klik disini untuk melihat</a>
+                    <span class="grey-text text-darken-4">Lihat hasil monitor gizi balita terkait. <br><a href="{{route('listbalita',$balita->id)}}">Klik disini untuk melihat</a>
                     </span>
                 </div>
             </div>

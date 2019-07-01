@@ -29,6 +29,9 @@ Route::group(['namespace' => 'Balita'], function () {
 	Route::post('/hasilgizi', 'MonitorController@perhitungan')->name('hasil');
 	Route::get('/listhasil/{id}', 'MonitorController@listhasil')->name('listbalita');
 	Route::get('/databalita/{id}', 'BalitaController@isidata')->name('isidata');
+	//petugas monitor
+	Route::get('/showortu', 'PetugasController@listortu')->name('listortu');
+	Route::get('/showbalita/{id}', 'PetugasController@getBalitabyOrtu')->name('getBalitabyOrtu');
 });
 Route::group(['namespace' => 'Posyandu'], function () {
 	Route::resource('PantauBalita/Posyandu', 'PosyanduController');

@@ -38,9 +38,6 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col m6 s12">
-            <span>ingin berkonsultasi dengan ahli? <a href="{{route('showpetugas')}}">tanya disini</a></span>
-        </div>
         <div class="col m3 s12 push-m1">
             <a href="{{route('listbalita',$monitor ->balita_id)}}" class="blue lighten-effect blue lighten-2 btn z-depth-3"><i class="material-icons left">collections</i>List Hasil</a>
         </div>

@@ -13,10 +13,6 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Model\role');
     }
-    // public function petugass()
-    // {
-    //     return $this->belongsToMany('App\Model\role', 'role_user')->where('role_id', 2)->orderBy('created_at', 'DESC')->paginate(6);
-    // }
     use Notifiable;
 
     /**

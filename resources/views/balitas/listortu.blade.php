@@ -29,7 +29,7 @@
                     <td>{{$ortu->name}}</td>
                     <td>{{$ortu->phone}}</td>
                     <td>{{$ortu->alamat}}</td>
-                    <td><a href="{{route('getBalitabyOrtu',$ortu->id)}}"><i class="material-icons">edit</i></a></td>
+                    <td><a class="tooltipped" data-position="bottom" data-tooltip="lihat data balita orang tua terkait" href="{{route('getBalitabyOrtu',$ortu->id)}}"><i class="material-icons">child_care</i></a></td>
                 </tr>
                 @endforeach
             </tbody>

@@ -18,7 +18,7 @@
                     <th>S.No</th>
                     <th>Nama</th>
                     <th>Tempat Lahit</th>
-                    <th>RW</th>
+                    <th>Jenis Kelamin</th>
                     <th>Monitor</th>
                 </tr>
             </thead>
@@ -28,8 +28,8 @@
                     <td>{{$loop -> index +1}}</td>
                     <td>{{$lists->nama}}</td>
                     <td>{{$lists->pob}}</td>
-                    <td>{{$lists->rw_id}}</td>
-                    <td><a href="{{route('isidata',$lists->id)}}"><i class="material-icons">edit</i></a></td>
+                    <td> @if($lists->JK == 1) Laki-laki @else Perempuan @endif</td>
+                    <td><a class="tooltipped" data-position="bottom" data-tooltip="monitor data balita terkait" href="{{route('isidata',$lists->id)}}"><i class="material-icons">computer</i></a></td>
                 </tr>
                 @endforeach
             </tbody>

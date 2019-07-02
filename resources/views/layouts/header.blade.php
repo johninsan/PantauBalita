@@ -18,9 +18,9 @@
     @endcan
   </ul>
   <ul class="dropdown-content" id="dropdownpetugas">
-    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk pantau gizi pada rw" href="{{route('cekgizi')}}">Pantau Gizi</a>
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Pantau gizi pada rw" href="{{route('cekgizi')}}">Pantau Gizi</a>
     </li>
-    <li><a class="tooltipped" data-position="bottom" data-tooltip="Klik untuk monitor gizi pada balita" href="{{route('listortu')}}">Monitor Gizi</a>
+    <li><a class="tooltipped" data-position="bottom" data-tooltip="Monitor gizi pada balita" href="{{route('listortu')}}">Monitor Gizi</a>
     </li>
   </ul>
   {{-- article mobile --}}

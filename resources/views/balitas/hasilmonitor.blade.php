@@ -10,7 +10,9 @@
 <div class="container bayiimg">
     <div class="row">
         <div class="col m4 s12 center">
-            <img class="responsive-img materialboxed" src="/materialize/images/img/clients/1.jpg">
+            @if(empty($monitor->foto))
+            <img class="responsive-img materialboxed" src="/materialize/images/img/clients/1.jpg"> @else
+            <img class="responsive-img materialboxed" src="{{ url( 'uploads/foto') }}/{{ $monitor->foto }}"> @endif
         </div>
         <div class="col m4 s12 push-m2">
             <ul class="collection with-header">

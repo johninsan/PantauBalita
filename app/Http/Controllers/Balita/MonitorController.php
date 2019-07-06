@@ -15,7 +15,27 @@ class MonitorController extends Controller
     public function index($id)
     {
         $balitas = balita::where('id', $id)->get();
-        return view('balitas.monitor', compact('balitas'));
+        $lahirarray = balita::where('id', $id)
+            ->select('dob')->get();
+        $row = count($lahirarray);
+        for ($i = 0; $i < $row; $i++) {
+            $lahirarray = $lahirarray[$i]->dob;
+        }
+        $lahir = $lahirarray;
+        $date2 = Carbon::now()->toDateTimeString();
+        $date1 = $lahir;
+
+        $ts1 = strtotime($date1);
+        $ts2 = strtotime($date2);
+
+        $year1 = date('Y', $ts1);
+        $year2 = date('Y', $ts2);
+
+        $month1 = date('m', $ts1);
+        $month2 = date('m', $ts2);
+
+        $months = (($year2 - $year1) * 12) + ($month2 - $month1);
+        return view('balitas.monitor', compact('balitas', 'months'));
     }
     public function hasilmonitor($kode)
     {
@@ -87,25 +107,8 @@ class MonitorController extends Controller
     public function perhitungan(Request $request)
     {
         $berat = $request->Berat;
-        // $months = $request->umur;
+        $months = $request->umur;
         $jk = $request->jk;
-        $lahir = $request->dob;
-        $date2 = Carbon::now()->toDateTimeString();
-        $date1 = $lahir;
-
-        $ts1 = strtotime($date1);
-        $ts2 = strtotime($date2);
-
-        $year1 = date('Y', $ts1);
-        $year2 = date('Y', $ts2);
-
-        $month1 = date('m', $ts1);
-        $month2 = date('m', $ts2);
-
-        $months = (($year2 - $year1) * 12) + ($month2 - $month1);
-        // $diff = abs(strtotime($current_date_time) - strtotime($lahir));
-        // $years = floor($diff / (365 * 60 * 60 * 24));
-        // $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
         $fuzzy = new Fuzzy("Gizi", "Tsukamoto");
         $fuzzy->input()->addCategory('umur')
             ->addMembership('fase1', 'trapmf', [0, 0, 3, 6])
@@ -348,6 +351,18 @@ class MonitorController extends Controller
         $kode = str_random(30);
         $monitor->balita_id = $request->balita_id;
         $monitor->kode = $kode;
+        $file = $request->file('foto');
+        if (empty($file)) {
+            $monitor->urlfoto = null;
+            $monitor->foto = null;
+        } else {
+            $ext = $file->getClientOriginalExtension();
+            $newName = rand(100000, 1001238912) . "." . $ext;
+            $file->move('uploads/foto/', $newName);
+            $monitor->foto = $newName;
+            $urlfoto = url('uploads/foto/') . $newName;
+            $monitor->urlfoto = $urlfoto;
+        }
         $monitor->jk = $jk;
         $monitor->beratbadan = $berat;
         $monitor->rw_id = $request->rw_id;

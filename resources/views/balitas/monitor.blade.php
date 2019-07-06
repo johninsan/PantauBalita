@@ -16,25 +16,23 @@
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>
+                <input readonly id="umur" name="umur" type="text" value="{{$months}}">
+                <label for="umur">umur:</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m6 s12 push-m2">
+                <i class="material-icons prefix">colorize</i>
                 <input id="Berat" name="Berat" type="number" step=".01" min="1" max="28" class="validate">
                 <label for="Berat">Berat Badan:</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
         </div>
-        {{--
-        <div class="row">
-            <div class="input-field col m6 s12 push-m2">
-                <i class="material-icons prefix">colorize</i>
-                <input id="umur" name="umur" type="number" class="validate">
-                <label for="umur">umur:</label>
-                <span class="helper-text" data-error="wrong" data-success="right"></span>
-            </div>
-        </div> --}}
         <div class="row">
             <div class="file-field input-field col m6 s12 push-m2">
                 <div class="btn">
                     <span>File</span>
-                    <input type="file">
+                    <input type="file" name="foto">
                 </div>
                 <div class="file-path-wrapper">
                     <input class="file-path validate" placeholder="Unggah foto Balita" type="text">

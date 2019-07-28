@@ -108,244 +108,297 @@ class MonitorController extends Controller
     {
         $berat = $request->Berat;
         $months = $request->umur;
+        $tinggi = $request->tinggi;
         $jk = $request->jk;
+        $gb;
+        $gk;
+        $s;
+        $gl;
+        $o;
+        $tahap1;
+        $tahap2;
+        $tahap3;
+        $tahap4;
+        $tahap5;
+        //tahap1
+        if ($months >= "12") {
+            $tahap1 = 0;
+        } elseif ($months <= "6") {
+            $tahap1 = 1;
+        } elseif ($months >= "6" && $months <= "12") {
+            $tahap1 = (12 - $months) / (12 - 6);
+        }
+        //tahap2
+        if ($months >= "24") {
+            $tahap2 = 0;
+        } elseif ($months <= "6") {
+            $tahap2 = 0;
+        } elseif ($months >= "6" && $months <= "12") {
+            $tahap2 = ($months - 6) / (12 - 6);
+        } elseif ($months >= "12" && $months <= "24") {
+            $tahap2 = (24 - $months) / (24 - 12);
+        }
+        //tahap3
+        if ($months >= "36") {
+            $tahap3 = 0;
+        } elseif ($months <= "12") {
+            $tahap3 = 0;
+        } elseif ($months >= "12" && $months <= "24") {
+            $tahap3 = ($months - 12) / (24 - 12);
+        } elseif ($months >= "24" && $months <= "36") {
+            $tahap3 = (36 - $months) / (36 - 24);
+        }
+        //tahap 4
+        if ($months >= "48") {
+            $tahap4 = 0;
+        } elseif ($months <= "24") {
+            $tahap4 = 0;
+        } elseif ($months >= "24" && $months <= "36") {
+            $tahap4 = ($months - 24) / (24 - 12);
+        } elseif ($months >= "36" && $months <= "48") {
+            $tahap4 = (48 - $months) / (48 - 36);
+        }
+        //tahap 5
+        if ($months >= "48" && $months <= "60") {
+            $tahap5 = 1;
+        } elseif ($months <= "36") {
+            $tahap5 = 0;
+        } elseif ($months >= "36" && $months <= "48") {
+            $tahap5 = ($months - 36) / (48 - 36);
+        } elseif ($months >= "60") {
+            $tahap5 = 0;
+        }
         $fuzzy = new Fuzzy("Gizi", "Tsukamoto");
-        $fuzzy->input()->addCategory('umur')
-            ->addMembership('fase1', 'trapmf', [0, 0, 3, 6])
-            ->addMembership('fase2', 'trapmf', [3, 6, 9, 12])
-            ->addMembership('fase3', 'trapmf', [9, 12, 15, 18])
-            ->addMembership('fase4', 'trapmf', [15, 18, 21, 24])
-            ->addMembership('fase5', 'trapmf', [21, 24, 27, 30])
-            ->addMembership('fase6', 'trapmf', [27, 30, 33, 36])
-            ->addMembership('fase7', 'trapmf', [33, 36, 39, 42])
-            ->addMembership('fase8', 'trapmf', [39, 42, 45, 48])
-            ->addMembership('fase9', 'trapmf', [45, 48, 51, 54])
-            ->addMembership('fase10', 'trapmf', [51, 54, 60, 60]);
-        $fuzzy->input()->addCategory('BeratBadan')
-            ->addMembership('sk', 'trapmf', [0, 0, 3, 4])
-            ->addMembership('kb', 'trapmf', [3, 4, 6, 7])
-            ->addMembership('cb', 'trapmf', [6, 7, 9, 10])
-            ->addMembership('n', 'trapmf', [9, 10, 12, 13])
-            ->addMembership('bl', 'trapmf', [12, 13, 16, 17])
-            ->addMembership('bo', 'trapmf', [16, 17, 28, 28]);
+        if ($jk == 1) {
+            $fuzzy->input()->addCategory('BB')
+                ->addMembership('KB', 'trapmf', [0, 0, 7, 13])
+                ->addMembership('N', 'trimf', [7, 13, 19])
+                ->addMembership('BL', 'trapmf', [13, 19, 28, 28]);
+            $fuzzy->input()->addCategory('TB')
+                ->addMembership('P', 'trapmf', [0, 0, 49, 75])
+                ->addMembership('sedang', 'trimf', [49, 75, 101])
+            // ->addMembership('sedang', 'trapmf', [45, 75, 90, 101])
+                ->addMembership('T', 'trapmf', [75, 101, 120, 120]);
+        } else {
+            $fuzzy->input()->addCategory('BB')
+                ->addMembership('KB', 'trapmf', [0, 0, 7, 12])
+                ->addMembership('N', 'trimf', [7, 12, 18])
+                ->addMembership('BL', 'trapmf', [12, 18, 26, 26]);
+            $fuzzy->input()->addCategory('TB')
+                ->addMembership('P', 'trapmf', [0, 0, 48, 74])
+                ->addMembership('sedang', 'trimf', [48, 74, 100])
+            // ->addMembership('sedang', 'trapmf', [45, 75, 90, 101])
+                ->addMembership('T', 'trapmf', [74, 100, 120, 120]);
+        }
         $fuzzy->output()->addCategory('gizi')
-            ->addMembership('gb', 'trapmf', [0, 0, 0.25, 0.30])
-            ->addMembership('gk', 'trapmf', [0.25, 0.30, 0.40, 0.45])
-            ->addMembership('s', 'trapmf', [0.40, 0.45, 0.55, 0.60])
-            ->addMembership('gl', 'trapmf', [0.55, 0.60, 0.70, 0.75])
-            ->addMembership('o', 'trapmf', [0.70, 0.75, 1, 1]);
-            //fase1
-        $fuzzy->rules()
-            ->add('umur_fase1 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        if ($jk == 1) {
+            ->addMembership('gb', 'trapmf', [0, 0, 43, 48])
+            ->addMembership('gk', 'trimf', [43, 48, 53])
+            ->addMembership('s', 'trimf', [48, 53, 70])
+            ->addMembership('gl', 'trimf', [53, 70, 83])
+            ->addMembership('o', 'trapmf', [70, 83, 123, 123]);
+            //tahap 1
+        if ($tahap1 != 0) {
             $fuzzy->rules()
-                ->add('umur_fase1 AND BeratBadan_kb')
+                ->add('BB_KB AND TB_P')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_sedang')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_T')
                 ->then('gizi_gk');
             $fuzzy->rules()
-                ->add('umur_fase1 AND BeratBadan_cb')
-                ->then('gizi_s');
-        } else {
-            $fuzzy->rules()
-                ->add('umur_fase1 AND BeratBadan_kb')
-                ->then('gizi_s');
-            $fuzzy->rules()
-                ->add('umur_fase1 AND BeratBadan_cb')
+                ->add('BB_N AND TB_P')
                 ->then('gizi_gl');
-        }
-        $fuzzy->rules()
-            ->add('umur_fase1 AND BeratBadan_n')
-            ->then('gizi_o');
-        $fuzzy->rules()
-            ->add('umur_fase1 AND BeratBadan_bl')
-            ->then('gizi_o');
-        $fuzzy->rules()
-            ->add('umur_fase1 AND BeratBadan_bo')
-            ->then('gizi_o');
-            //fase 2
-        $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_cb')
-            ->then('gizi_s');
-        $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_n')
-            ->then('gizi_gl');
-        $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_bl')
-            ->then('gizi_o');
-        $fuzzy->rules()
-            ->add('umur_fase2 AND BeratBadan_bo')
-            ->then('gizi_o');
-            //fase 3
-        $fuzzy->rules()
-            ->add('umur_fase3 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase3 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase3 AND BeratBadan_cb')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase3 AND BeratBadan_n')
-            ->then('gizi_s');
-        $fuzzy->rules()
-            ->add('umur_fase3 AND BeratBadan_bl')
-            ->then('gizi_gl');
-        $fuzzy->rules()
-            ->add('umur_fase3 AND BeratBadan_bo')
-            ->then('gizi_o');
-            //fase 4
-        $fuzzy->rules()
-            ->add('umur_fase4 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase4 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase4 AND BeratBadan_cb')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase4 AND BeratBadan_n')
-            ->then('gizi_s');
-        $fuzzy->rules()
-            ->add('umur_fase4 AND BeratBadan_bl')
-            ->then('gizi_gl');
-        $fuzzy->rules()
-            ->add('umur_fase4 AND BeratBadan_bo')
-            ->then('gizi_o');
-            //fase5
-        $fuzzy->rules()
-            ->add('umur_fase5 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase5 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase5 AND BeratBadan_cb')
-            ->then('gizi_gb');
-        if ($jk == 1) {
             $fuzzy->rules()
-                ->add('umur_fase5 AND BeratBadan_n')
+                ->add('BB_N AND TB_sedang')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_T')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_P')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_sedang')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_T')
+                ->then('gizi_o');
+        }
+        if ($tahap2 != 0) {
+            //tahap 2
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_P')
                 ->then('gizi_gk');
             $fuzzy->rules()
-                ->add('umur_fase5 AND BeratBadan_bl')
-                ->then('gizi_s');
-        } else {
+                ->add('BB_KB AND TB_sedang')
+                ->then('gizi_gk');
             $fuzzy->rules()
-                ->add('umur_fase5 AND BeratBadan_n')
+                ->add('BB_KB AND TB_T')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_P')
                 ->then('gizi_s');
             $fuzzy->rules()
-                ->add('umur_fase5 AND BeratBadan_bl')
+                ->add('BB_N AND TB_sedang')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_T')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_P')
                 ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_sedang')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_T')
+                ->then('gizi_o');
         }
-        $fuzzy->rules()
-            ->add('umur_fase5 AND BeratBadan_bo')
-            ->then('gizi_o');
-            //fase6
-        $fuzzy->rules()
-            ->add('umur_fase6 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase6 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase6 AND BeratBadan_cb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase6 AND BeratBadan_n')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase6 AND BeratBadan_bl')
-            ->then('gizi_s');
-        $fuzzy->rules()
-            ->add('umur_fase6 AND BeratBadan_bo')
-            ->then('gizi_o');
-            //fase7
-        $fuzzy->rules()
-            ->add('umur_fase7 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase7 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase7 AND BeratBadan_cb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase7 AND BeratBadan_n')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase7 AND BeratBadan_bl')
-            ->then('gizi_s');
-        $fuzzy->rules()
-            ->add('umur_fase7 AND BeratBadan_bo')
-            ->then('gizi_gl');
-            //fase8
-        $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_cb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_n')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_bl')
-            ->then('gizi_s');
-        $fuzzy->rules()
-            ->add('umur_fase8 AND BeratBadan_bo')
-            ->then('gizi_gl');
-            //fase9
-        $fuzzy->rules()
-            ->add('umur_fase9 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase9 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase9 AND BeratBadan_cb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase9 AND BeratBadan_n')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase9 AND BeratBadan_bl')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase9 AND BeratBadan_bo')
-            ->then('gizi_s');
-            //fase10
-        $fuzzy->rules()
-            ->add('umur_fase10 AND BeratBadan_sk')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase10 AND BeratBadan_kb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase10 AND BeratBadan_cb')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase10 AND BeratBadan_n')
-            ->then('gizi_gb');
-        $fuzzy->rules()
-            ->add('umur_fase10 AND BeratBadan_bl')
-            ->then('gizi_gk');
-        $fuzzy->rules()
-            ->add('umur_fase10 AND BeratBadan_bo')
-            ->then('gizi_s');
+         //tahap 3-----------------------------------------------------
+        if ($tahap3 != 0) {
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_P')
+                ->then('gizi_gb');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_sedang')
+                ->then('gizi_gb');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_T')
+                ->then('gizi_gb');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_P')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_sedang')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_T')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_P')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_sedang')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_T')
+                ->then('gizi_o');
+        }
+        //tahap 4
+        if ($tahap4 != 0) {
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_P')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_sedang')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_T')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_P')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_sedang')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_T')
+                ->then('gizi_s');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_P')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_sedang')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_T')
+                ->then('gizi_s');
+        }
+            //tahap 5
+        if ($tahap5 != 0) {
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_P')
+                ->then('gizi_gb');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_sedang')
+                ->then('gizi_gb');
+            $fuzzy->rules()
+                ->add('BB_KB AND TB_T')
+                ->then('gizi_gb');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_P')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_sedang')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_N AND TB_T')
+                ->then('gizi_gk');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_P')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_sedang')
+                ->then('gizi_gl');
+            $fuzzy->rules()
+                ->add('BB_BL AND TB_T')
+                ->then('gizi_s');
+        }
         $total = $fuzzy->calc([
-            'umur' => $months,
-            'BeratBadan' => $berat
+            'BB' => $berat,
+            'TB' => $tinggi
         ]);
+        //hasil gizi
+        //gb
+        if ($total >= "48") {
+            $gb = 0;
+        } elseif ($total <= "43") {
+            $gb = 1;
+        } elseif ($total >= "43" && $total <= "48") {
+            $gb = (48 - $total) / (48 - 43);
+        }
+        //gk
+        if ($total >= "53") {
+            $gk = 0;
+        } elseif ($total <= "43") {
+            $gk = 0;
+        } elseif ($total >= "43" && $total <= "48") {
+            $gk = ($total - 43) / (48 - 43);
+        } elseif ($total >= "48" && $total <= "53") {
+            $gk = (53 - $total) / (53 - 48);
+        }
+        //s
+        if ($total >= "70") {
+            $s = 0;
+        } elseif ($total <= "48") {
+            $s = 0;
+        } elseif ($total >= "48" && $total <= "53") {
+            $s = ($total - 48) / (53 - 48);
+        } elseif ($total >= "53" && $total <= "70") {
+            $s = (70 - $total) / (70 - 53);
+        }
+        //gl
+        if ($total >= "83") {
+            $gl = 0;
+        } elseif ($total <= "53") {
+            $gl = 0;
+        } elseif ($total >= "53" && $total <= "70") {
+            $gl = ($total - 53) / (70 - 53);
+        } elseif ($total >= "70" && $total <= "83") {
+            $gl = (48 - $total) / (48 - 36);
+        }
+        //obesitas
+        if ($total >= "83" && $total <= "123") {
+            $o = 1;
+        } elseif ($total <= "70") {
+            $o = 0;
+        } elseif ($total >= "70" && $total <= "83") {
+            $o = ($total - 70) / (83 - 70);
+        } elseif ($total >= "123") {
+            $o = 0;
+        }
         // return $total;
         $monitor = new monitor();
         $kode = str_random(30);
@@ -367,16 +420,17 @@ class MonitorController extends Controller
         $monitor->beratbadan = $berat;
         $monitor->rw_id = $request->rw_id;
         $monitor->umur = $months;
+        $monitor->tinggi = $tinggi;
         $monitor->hasil = $total;
-        if ($total <= "0.25") {
+        if ($gb > $gk) {
             $monitor->status = 1;
-        } elseif ($total >= "0.25" && $total <= "0.4") {
+        } elseif ($gk > $gb && $gk > $s) {
             $monitor->status = 2;
-        } elseif ($total >= "0.4" && $total <= "0.55") {
+        } elseif ($s > $gk && $s > $gl) {
             $monitor->status = 3;
-        } elseif ($total >= "0.55" && $total <= "0.7") {
+        } elseif ($gl > $s && $gl > $o) {
             $monitor->status = 4;
-        } elseif ($total >= "0.7") {
+        } elseif ($o > $gl) {
             $monitor->status = 5;
         }
         $monitor->save();

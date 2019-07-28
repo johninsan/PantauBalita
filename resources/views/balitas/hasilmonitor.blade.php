@@ -21,6 +21,7 @@
                 </li>
                 <li class="collection-item">Berat Badan: {{$monitor->beratbadan}}Kg</li>
                 <li class="collection-item">Umur : {{$monitor->umur}} Bulan</li>
+                <li class="collection-item">Tinggi Badan : {{$monitor->tinggi}} CM</li>
                 <li class="collection-item">Jenis Kelamin : @if($monitor->jk == 1) Laki-laki @else Perempuan @endif
                 </li>
             </ul>

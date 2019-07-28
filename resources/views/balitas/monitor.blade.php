@@ -16,15 +16,23 @@
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>
-                <input readonly id="umur" name="umur" type="text" value="{{$months}}">
+                <input id="umur" name="umur" type="text" value="{{$months}}">
                 <label for="umur">umur:</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col m6 s12 push-m2">
                 <i class="material-icons prefix">colorize</i>
-                <input id="Berat" name="Berat" type="number" step=".01" min="1" max="28" class="validate">
+                <input id="Berat" name="Berat" type="number" step=".01" min="1" max="28" class="validate" required>
                 <label for="Berat">Berat Badan:</label>
+                <span class="helper-text" data-error="wrong" data-success="right"></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col m6 s12 push-m2">
+                <i class="material-icons prefix">colorize</i>
+                <input id="Tinggi" name="tinggi" type="number" step=".01" min="1" max="120" class="validate" required>
+                <label for="Tinggi">Tinggi Badan:</label>
                 <span class="helper-text" data-error="wrong" data-success="right"></span>
             </div>
         </div>
@@ -44,7 +52,7 @@
     <div class="container">
         <div class="row">
             <div class="col m6 s12">
-                <a href="{{route('DaftarBalita.index')}}" class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
+                <a href="{{route('listortu')}}" class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
                 <button class="btn waves-effect waves-light col m6 s6 push-s1 push-m2 z-depth-3" type="submit">Submit
                 <i class="material-icons right">done</i>
                 </button>

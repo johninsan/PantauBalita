@@ -35,7 +35,7 @@
         <div class="container">
             <div class="row">
                 <div class="col m6 s12">
-                    <a href="#" class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
+                    <a href="{{route('home')}}" class="pink lighten-effect pink lighten-2 btn col m6 s6 z-depth-3"><i class="material-icons left">arrow_back</i>Kembali</a>
                     <button class="btn waves-effect waves-light col m6 s6 push-s1 push-m2 z-depth-3" type="submit">Submit
                 <i class="material-icons right">done</i>
                 </button>

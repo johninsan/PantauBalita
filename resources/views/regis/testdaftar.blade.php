@@ -4,6 +4,7 @@
 	<h3 class="center light grey-text text-darken-3">Daftar Akun</h3>
 </section>
 <div class="container">
+	@include('includes.messages')
 	<div class="row">
 		<form method="POST" action="{{route('registerpost')}}">
 			{{csrf_field()}}
